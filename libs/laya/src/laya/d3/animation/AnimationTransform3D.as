@@ -139,10 +139,7 @@ package laya.d3.animation {
 			} else {
 				var entityTransform:Transform3D = _entity.owner._transform;
 				var entityPosition:Vector3 = _entity.localPosition;
-				var entityPositionE:Float32Array = entityPosition.elements;
-				entityPositionE[0] = value[0];
-				entityPositionE[1] = value[1];
-				entityPositionE[2] = value[2];
+				value.cloneTo(entityPosition);
 				entityTransform.localPosition = entityPosition;
 			}
 		}
@@ -175,11 +172,7 @@ package laya.d3.animation {
 			} else {
 				var entityTransform:Transform3D = _entity.owner._transform;
 				var entityRotation:Quaternion = _entity.localRotation;
-				var entityRotationE:Float32Array = entityRotation.elements;
-				entityRotationE[0] = value[0];
-				entityRotationE[1] = value[1];
-				entityRotationE[2] = value[2];
-				entityRotationE[3] = value[3];
+				value.cloneTo(entityRotation);
 				entityTransform.localRotation = entityRotation;
 			}
 		}
@@ -204,10 +197,7 @@ package laya.d3.animation {
 			} else {
 				var entityTransform:Transform3D = _entity.owner._transform;
 				var entityScale:Vector3 = _entity.localScale;
-				var entityScaleE:Float32Array = entityScale.elements;
-				entityScaleE[0] = value[0];
-				entityScaleE[1] = value[1];
-				entityScaleE[2] = value[2];
+				value.cloneTo(entityScale);
 				entityTransform.localScale = entityScale;
 			}
 		}

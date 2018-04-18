@@ -91,14 +91,9 @@ package {
 		public static var debugMode:Boolean = false;
 		
 		/**
-		 *@private
+		 * 创建一个 <code>Laya3D</code> 实例。
 		 */
-		public static function _cancelLoadByUrl(url:String):void {
-			Laya.loader.cancelLoadByUrl(url);
-			_innerFirstLevelLoaderManager.cancelLoadByUrl(url);
-			_innerSecondLevelLoaderManager.cancelLoadByUrl(url);
-			_innerThirdLevelLoaderManager.cancelLoadByUrl(url);
-			_innerFourthLevelLoaderManager.cancelLoadByUrl(url);
+		public function Laya3D() {
 		}
 		
 		/**
@@ -186,31 +181,6 @@ package {
 		/**
 		 *@private
 		 */
-		private static function formatRelativePath(base:String, value:String):String {
-			var path;
-			var char1:String = value.charAt(0);
-			if (char1 === ".") {
-				var parts:Array = (base + value).split("/");
-				for (var i:int = 0, len:int = parts.length; i < len; i++) {
-					if (parts[i] == '..') {
-						var index:int = i - 1;
-						if (index > 0 && parts[index] !== '..') {
-							parts.splice(index, 2);
-							i -= 2;
-						}
-					}
-				}
-				path = parts.join('/');
-			} else {
-				path = base + value;
-			}
-			(URL.customFormat != null)&&(path = URL.customFormat(path, null));
-			return path;
-		}
-		
-		/**
-		 *@private
-		 */
 		private static function _eventLoadManagerError(msg:String):void {
 			Laya.loader.event(Event.ERROR, msg);
 		}
@@ -219,7 +189,7 @@ package {
 		 *@private
 		 */
 		private static function _addHierarchyInnerUrls(urls:Array, urlMap:Object, urlVersion:String, hierarchyBasePath:String, path:String, clas:Class):void {
-			var formatSubUrl:String = formatRelativePath(hierarchyBasePath, path);
+			var formatSubUrl:String = URL.formatURL(path, hierarchyBasePath);
 			(urlVersion) && (formatSubUrl = formatSubUrl + urlVersion);
 			urls.push({url: formatSubUrl, clas: clas});
 			urlMap[path] = formatSubUrl;
@@ -235,13 +205,12 @@ package {
 			case "Scene": //TODO:应该自动序列化类型
 				var lightmaps:Array = node.customProps.lightmaps;
 				for (i = 0, n = lightmaps.length; i < n; i++) {
-					var lightMap:String = lightmaps[i].replace(".exr", ".png");
+					var lightMap:String = lightmaps[i].replace("exr", "png");
 					_addHierarchyInnerUrls(fourthLelUrls, urlMap, urlVersion, hierarchyBasePath, lightMap, Texture2D);
 				}
 				break;
 			case "MeshSprite3D": 
 			case "TrailSprite3D": 
-			case "LineSprite3D": 
 			case "SkinnedMeshSprite3D": 
 				var meshPath:String;
 				if (node.instanceParams) {//兼容代码
@@ -273,13 +242,7 @@ package {
 				(parMeshPath) && (_addHierarchyInnerUrls(firstLevelUrls, urlMap, urlVersion, hierarchyBasePath, parMeshPath, Mesh));
 				var materialData:Object = customProps.material;
 				if (materialData) {
-					var clasPaths:Array = materialData.type.split('.');
-					var clas:Class = Browser.window;
-					clasPaths.forEach(function(cls:*):void {
-						clas = clas[cls];
-					});
-					
-					_addHierarchyInnerUrls(secondLevelUrls, urlMap, urlVersion, hierarchyBasePath, materialData.path, clas);
+					_addHierarchyInnerUrls(secondLevelUrls, urlMap, urlVersion, hierarchyBasePath, materialData.path, ShurikenParticleMaterial);
 				} else {//兼容代码
 					var materialPath:String = customProps.materialPath;
 					if (materialPath) {//兼容代码
@@ -339,7 +302,7 @@ package {
 			} else {
 				var url:String = loader.url;
 				var urlVersion:String = Utils3D.getURLVerion(url);
-				var hierarchyBasePath:String = URL.getPath(url);
+				var hierarchyBasePath:String = URL.getPath(URL.formatURL(url));
 				var firstLevUrls:Array = [];
 				var secondLevUrls:Array = [];
 				var forthLevUrls:Array = [];
@@ -419,7 +382,7 @@ package {
 			} else {
 				var url:String = loader.url;
 				var urlVersion:String = Utils3D.getURLVerion(url);
-				var terrainBasePath:String = URL.getPath(url);
+				var terrainBasePath:String = URL.getPath(URL.formatURL(url));
 				
 				var heightMapURL:String, textureURLs:Array = [];
 				var urlMap:Object = {};
@@ -428,7 +391,7 @@ package {
 				
 				var heightData:Object = ltData.heightData;
 				heightMapURL = heightData.url;
-				formatUrl = formatRelativePath(terrainBasePath, heightMapURL);
+				formatUrl = URL.formatURL(heightMapURL, terrainBasePath);
 				(urlVersion) && (formatUrl = formatUrl + urlVersion);
 				urlMap[heightMapURL] = formatUrl;
 				heightMapURL = formatUrl;
@@ -447,7 +410,7 @@ package {
 				
 				for (i = 0, n = textureURLs.length; i < n; i++) {
 					var subUrl:String = textureURLs[i].url;
-					formatUrl = formatRelativePath(terrainBasePath, subUrl);
+					formatUrl = URL.formatURL(subUrl, terrainBasePath);
 					(urlVersion) && (formatUrl = formatUrl + urlVersion);
 					textureURLs[i].url = formatUrl;
 					urlMap[subUrl] = formatUrl;
@@ -506,7 +469,7 @@ package {
 			} else {
 				var url:String = loader.url;
 				var urlVersion:String = Utils3D.getURLVerion(url);
-				var meshBasePath:String = URL.getPath(url);
+				var meshBasePath:String = URL.getPath(URL.formatURL(url));
 				
 				var urls:Array;
 				var urlMap:Object = {};
@@ -555,7 +518,7 @@ package {
 				
 				for (i = 0, n = urls.length; i < n; i++) {
 					var subUrl:String = urls[i];
-					formatSubUrl = formatRelativePath(meshBasePath, subUrl);
+					formatSubUrl = URL.formatURL(subUrl, meshBasePath);
 					(urlVersion) && (formatSubUrl = formatSubUrl + urlVersion);
 					urls[i] = formatSubUrl;
 					urlMap[subUrl] = formatSubUrl;
@@ -590,7 +553,7 @@ package {
 			if (path.indexOf(".dds") == extenIndex || path.indexOf(".tga") == extenIndex || path.indexOf(".exr") == extenIndex || path.indexOf(".DDS") == extenIndex || path.indexOf(".TGA") == extenIndex || path.indexOf(".EXR") == extenIndex)
 				path = path.substr(0, extenIndex) + ".png";
 			
-			path = formatRelativePath(materialBath, path);
+			path = URL.formatURL(path, materialBath);
 			(urlVersion) && (path = path + urlVersion);
 			return path;
 		}
@@ -612,7 +575,7 @@ package {
 			} else {
 				var url:String = loader.url;
 				var urlVersion:String = Utils3D.getURLVerion(url);
-				var materialBasePath:String = URL.getPath(url);
+				var materialBasePath:String = URL.getPath(URL.formatURL(url));
 				var urls:Array = [];
 				var urlMap:Object = {};
 				var customProps:Object = lmatData.customProps;
@@ -629,7 +592,7 @@ package {
 								var extenIndex:int = path.length - 4;
 								if (path.indexOf(".exr") == extenIndex || path.indexOf(".EXR") == extenIndex)
 									path = path.substr(0, extenIndex) + ".png";
-								formatSubUrl = formatRelativePath(materialBasePath, path);
+								formatSubUrl = URL.formatURL(path, materialBasePath);
 								(urlVersion) && (formatSubUrl = formatSubUrl + urlVersion);
 								urls.push({url: formatSubUrl, params: tex.params});
 								urlMap[path] = formatSubUrl;
@@ -729,8 +692,8 @@ package {
 			if (loader._class.destroyed) {
 				loader.endLoad();
 			} else {
-				var ltcBasePath:String = URL.getPath(loader.url);
-				var urls:Array = [formatRelativePath(ltcBasePath, ltcData.px), formatRelativePath(ltcBasePath, ltcData.nx), formatRelativePath(ltcBasePath, ltcData.py), formatRelativePath(ltcBasePath, ltcData.ny), formatRelativePath(ltcBasePath, ltcData.pz), formatRelativePath(ltcBasePath, ltcData.nz)];
+				var ltcBasePath:String = URL.getPath(URL.formatURL(loader.url));
+				var urls:Array = [URL.formatURL(ltcData.px, ltcBasePath), URL.formatURL(ltcData.nx, ltcBasePath), URL.formatURL(ltcData.py, ltcBasePath), URL.formatURL(ltcData.ny, ltcBasePath), URL.formatURL(ltcData.pz, ltcBasePath), URL.formatURL(ltcData.nz, ltcBasePath)];
 				var ltcWeight:Number = 1.0 / 7.0;
 				_onProcessChange(loader, 0, ltcWeight, 1.0);
 				var processHandler:Handler = Handler.create(null, _onProcessChange, [loader, ltcWeight, 6 / 7], false);
@@ -771,16 +734,12 @@ package {
 				CollisionManager._triggerCollision();
 			}
 			
-			RunDriver.cancelLoadByUrl = function(url:String):void {
-				Laya3D._cancelLoadByUrl(url);
-			}
-			
 			Config.isAntialias = antialias;
 			Config.isAlpha = alpha;
 			Config.premultipliedAlpha = premultipliedAlpha;
 			Config.isStencil = stencil;
-
-			if (!WebGL.enable()) {
+			
+			if (!Render.isConchNode && !WebGL.enable()) {
 				alert("Laya3D init error,must support webGL!");
 				return;
 			}
@@ -810,12 +769,6 @@ package {
 			
 			if (Laya3D.debugMode || OctreeNode.debugMode)
 				_debugPhasorSprite = new PhasorSpriter3D();
-		}
-		
-		/**
-		 * 创建一个 <code>Laya3D</code> 实例。
-		 */
-		public function Laya3D() {
 		}
 	
 	}

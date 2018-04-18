@@ -145,13 +145,7 @@ package laya.media.webaudio {
 		{
 			if (!Browser.onMac)
 			{
-				try
-				{
-					sourceNode.buffer = null;
-				}catch (e:*)
-				{
-					_tryCleanFailed = true;
-				}
+				_tryCleanFailed = true;
 				return;
 			}
 			try { sourceNode.buffer = WebAudioSound._miniBuffer; } catch (e:*) { _tryCleanFailed = true; }

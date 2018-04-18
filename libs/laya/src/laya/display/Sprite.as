@@ -717,6 +717,7 @@ package laya.display {
 		
 		/**@private */
 		protected function _adjustTransform():Matrix {
+			'use strict';
 			_tfChanged = false;
 			var style:Style = this._style;
 			var tf:Object = style._tf;

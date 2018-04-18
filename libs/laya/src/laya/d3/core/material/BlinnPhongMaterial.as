@@ -30,7 +30,6 @@ package laya.d3.core.material {
 		public static var SHADERDEFINE_REFLECTMAP:int;
 		public static var SHADERDEFINE_TILINGOFFSET:int;
 		public static var SHADERDEFINE_ADDTIVEFOG:int;
-		public static var SHADERDEFINE_GLOWINGEDGE:int;
 		
 		public static const ALBEDOTEXTURE:int = 1;
 		public static const NORMALTEXTURE:int = 2;
@@ -42,7 +41,6 @@ package laya.d3.core.material {
 		public static const SHININESS:int = 9;
 		public static const MATERIALREFLECT:int = 10;
 		public static const TILINGOFFSET:int = 11;
-		public static const GLOWINGEDGECOLOR:int = 12;
 		
 		/** 默认材质，禁止修改*/
 		public static const defaultMaterial:BlinnPhongMaterial = new BlinnPhongMaterial();
@@ -58,8 +56,7 @@ package laya.d3.core.material {
 			SHADERDEFINE_SPECULARMAP = shaderDefines.registerDefine("SPECULARMAP");
 			SHADERDEFINE_REFLECTMAP = shaderDefines.registerDefine("REFLECTMAP");
 			SHADERDEFINE_TILINGOFFSET = shaderDefines.registerDefine("TILINGOFFSET");
-			SHADERDEFINE_ADDTIVEFOG = shaderDefines.registerDefine("ADDTIVEFOG");
-			SHADERDEFINE_GLOWINGEDGE = shaderDefines.registerDefine("GLOWINGEDGE");
+			SHADERDEFINE_ADDTIVEFOG = shaderDefines.registerDefine("ADDTIVEFOG");;
 		}
 		
 		/**
@@ -345,34 +342,6 @@ package laya.d3.core.material {
 			}
 		}
 		
-		/**
-		 * 设置是否开启边缘光照。
-		 * @param value 是否开启边缘光照。
-		 */
-		public function set enableGlowingEdge(value:Boolean):void {
-			if (value)
-				_addShaderDefine(BlinnPhongMaterial.SHADERDEFINE_GLOWINGEDGE);
-			else
-				_removeShaderDefine(BlinnPhongMaterial.SHADERDEFINE_GLOWINGEDGE);
-		}
-		
-		
-		/**
-		 * 获取边缘颜色。
-		 * @return value 边缘颜色。
-		 */
-		public function get glowingEdgeColor():Vector4 {
-			return _getColor(GLOWINGEDGECOLOR);
-		}
-		
-		/**
-		 * 设置边缘颜色。
-		 * @param value 边缘颜色。
-		 */
-		public function set glowingEdgeColor(value:Vector4):Vector4 {
-			_setColor(GLOWINGEDGECOLOR, value);
-		}
-		
 		public function BlinnPhongMaterial() {
 			/*[DISABLE-ADD-VARIABLE-DEFAULT-VALUE]*/
 			super();
@@ -388,7 +357,6 @@ package laya.d3.core.material {
 			_setColor(TILINGOFFSET, new Vector4(1.0, 1.0, 0.0, 0.0));
 			_enableLighting = true;
 			renderMode = RENDERMODE_OPAQUE;
-			_setColor(GLOWINGEDGECOLOR, new Vector4(1.0, 1.0, 1.0, 1.0));
 		}
 		
 		/**
@@ -403,17 +371,6 @@ package laya.d3.core.material {
 		 */
 		public function disableFog():void {
 			_addDisablePublicShaderDefine(ShaderCompile3D.SHADERDEFINE_FOG);
-		}
-		
-		/**
-		 * @inheritDoc
-		 */
-		override public function cloneTo(destObject:*):void {
-			super.cloneTo(destObject);
-			var destMaterial:BlinnPhongMaterial = destObject as BaseMaterial;
-			destMaterial._enableLighting = _enableLighting;
-			destMaterial._albedoIntensity = _albedoIntensity;
-			_albedoColor.cloneTo(destMaterial._albedoColor);
 		}
 	}
 

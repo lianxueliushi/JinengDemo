@@ -1,0 +1,4 @@
+<res>
+   <item name="comp/bg.png" type="Image" compress="0" pack="0" quality="80" props="sizeGrid=29,10,10,11" picType="0" scale="0"/>
+   <item name="comp/vscroll.png" type="VScrollBar" compress="0" pack="0" quality="80" props="" picType="0" scale="0"/>
+</res>

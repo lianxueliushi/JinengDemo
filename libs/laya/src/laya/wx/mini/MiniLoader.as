@@ -1,21 +1,18 @@
 package laya.wx.mini {
-	import laya.events.Event;
-	import laya.events.EventDispatcher;
 	import laya.net.Loader;
 	import laya.net.URL;
 	import laya.utils.Handler;
 	import laya.utils.Utils;
 	
-	/** @private **/
-	public class MiniLoader  extends EventDispatcher  {
-		/**@private 加载文件列表**/
+	public class MiniLoader {
+		/**加载文件列表**/
 		private static var _fileTypeArr:Array = ['png', 'jpg', 'bmp', 'jpeg', 'gif'];
 		
 		public function MiniLoader() {
 		}
 		
 		/**
-		 * @private 
+		 *
 		 * @param url
 		 * @param type
 		 * @param cache
@@ -32,40 +29,39 @@ package laya.wx.mini {
 			thisLoader._cache = cache;
 			thisLoader._data = null;
 			
-			if (!ignoreCache && Loader.loadedMap[URL.formatURL(url)]) {
-				thisLoader._data = Loader.loadedMap[URL.formatURL(url)];
-				event(Event.PROGRESS, 1);
-				event(Event.COMPLETE, thisLoader._data);
-				return;
+			var encoding:String = "ascii";
+			if (url.indexOf(".fnt") != -1) {
+				encoding = "utf8";
+			} else if (type == "arraybuffer") {
+				encoding = "";
 			}
-			
-			//如果自定义了解析器，则自己解析
-			if (Loader.parserMap[type] != null) {
-				thisLoader._customParse = true;
-				if (Loader.parserMap[type] is Handler) Loader.parserMap[type].runWith(this);
-				else Loader.parserMap[type].call(null, this);
-				return;
-			}
-			var encoding:String = MiniAdpter.getUrlEncode(url,type);
 			var urlType:String = Utils.getFileExtension(url);
 			if ((_fileTypeArr.indexOf(urlType) != -1)) {
-				//图片通过miniImage去加载
+				//远端文件加载走xmlhttprequest
 				MiniAdpter.EnvConfig.load.call(this, url, type, cache, group, ignoreCache);
 			} else {
-				//如果是子域就直接去缓存里检出子域
-				if(MiniAdpter.isZiYu && MiniFileMgr.ziyuFileData[url])
-				{
-					var tempData:Object = MiniFileMgr.ziyuFileData[url];
-					thisLoader.onLoaded(tempData);
-					return;
-				}
 				if (!MiniFileMgr.getFileInfo(url)) {
-					if (MiniFileMgr.isLocalNativeFile(url)) {
+					if (url.indexOf("layaNativeDir/") != -1) {
 						//直接读取本地，非网络加载缓存的资源
-						MiniFileMgr.read(url,encoding,new Handler(MiniLoader, onReadNativeCallBack, [encoding, url, type, cache, group, ignoreCache, thisLoader]));
-						return;
+						if(MiniAdpter.isZiYu)
+						{
+							//从minifile里读取数据内容，然后直接返回
+							var fileData:Object = MiniFileMgr.ziyuFileData[url];
+							thisLoader.onLoaded(fileData);
+							return;
+						}else
+						{
+							MiniFileMgr.read(url,encoding,new Handler(MiniLoader, onReadNativeCallBack, [encoding, url, type, cache, group, ignoreCache, thisLoader]));
+							return;
+						}
 					}
 					url = URL.formatURL(url);
+					//临时
+					//if(url.indexOf("ui.json") != -1)
+					//{
+						//encoding = "utf8";
+						//url = "ui.json";
+					//}
 					if (url.indexOf("http://") != -1 || url.indexOf("https://") != -1) {
 						//远端文件加载走xmlhttprequest
 						MiniAdpter.EnvConfig.load.call(thisLoader, url, type, cache, group, ignoreCache);
@@ -74,16 +70,14 @@ package laya.wx.mini {
 						MiniFileMgr.readFile(url, encoding, new Handler(MiniLoader, onReadNativeCallBack, [encoding, url, type, cache, group, ignoreCache, thisLoader]), url);
 					}
 				} else {
-					//读取本地磁盘非写入的文件，只是检测文件是否需要本地读取还是外围加载
-					var fileObj:Object = MiniFileMgr.getFileInfo(url);
-					fileObj.encoding = fileObj.encoding == null ? "ascii" : fileObj.encoding;
-					MiniFileMgr.readFile(url, fileObj.encoding, new Handler(MiniLoader, onReadNativeCallBack, [encoding, url, type, cache, group, ignoreCache, thisLoader]), url);
+					//远端文件加载走xmlhttprequest
+					MiniAdpter.EnvConfig.load.call(this, url, type, cache, group, ignoreCache);
 				}
 			}
 		}
 		
 		/**
-		 * @private 
+		 *
 		 * @param url
 		 * @param thisLoader
 		 * @param errorCode
@@ -101,12 +95,11 @@ package laya.wx.mini {
 				} else {
 					tempData = data.data;
 				}
-				//主域向子域派发数据
+				thisLoader.onLoaded(tempData);
 				if(!MiniAdpter.isZiYu &&MiniAdpter.isPosMsgYu && type  != Loader.BUFFER)
 				{
-					__JS__('wx').postMessage({url:url,data:tempData,isLoad:"filedata"});
+					__JS__('wx').postMessage({url:url,data:tempData,isLoad:true});
 				}
-				thisLoader.onLoaded(tempData);
 			} else if (errorCode == 1) {
 				//远端文件加载走xmlhttprequest
 				MiniAdpter.EnvConfig.load.call(thisLoader, url, type, cache, group, ignoreCache);
