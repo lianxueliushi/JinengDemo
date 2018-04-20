@@ -1,4 +1,4 @@
-package com.components{
+package com.components {
 	import laya.d3.component.Script;
 	import laya.d3.core.BaseCamera;
 	import laya.d3.core.Camera;
@@ -8,6 +8,7 @@ package com.components{
 	import laya.d3.math.Quaternion;
 	import laya.d3.math.Vector3;
 	import laya.events.Event;
+	import laya.events.KeyBoardManager;
 	
 	/**
 	 * ...
@@ -45,6 +46,7 @@ package com.components{
 		}
 		
 		protected function mouseDown(e:Event):void {
+			
 			camera.transform.localRotation.getYawPitchRoll(yawPitchRoll);
 			
 			lastMouseX = Laya.stage.mouseX;
@@ -63,12 +65,12 @@ package com.components{
 		protected function updateCamera(elapsedTime:Number):void {
 			if (!isNaN(lastMouseX) && !isNaN(lastMouseY)) {
 				var scene:Scene =(owner as Camera).scene;
-				// KeyBoardManager.hasKeyDown(87) && camera.moveForward(-0.005 * elapsedTime);//W
-				// KeyBoardManager.hasKeyDown(83) && camera.moveForward(0.005 * elapsedTime);//S
-				// KeyBoardManager.hasKeyDown(65) && camera.moveRight(-0.005 * elapsedTime);//A
-				// KeyBoardManager.hasKeyDown(68) && camera.moveRight(0.005 * elapsedTime);//D
-				// KeyBoardManager.hasKeyDown(81) && camera.moveVertical(0.005 * elapsedTime);//Q
-				// KeyBoardManager.hasKeyDown(69) && camera.moveVertical(-0.005 * elapsedTime);//E
+				 KeyBoardManager.hasKeyDown(87) && camera.moveForward(-0.005 * elapsedTime);//W
+				 KeyBoardManager.hasKeyDown(83) && camera.moveForward(0.005 * elapsedTime);//S
+				 KeyBoardManager.hasKeyDown(65) && camera.moveRight(-0.005 * elapsedTime);//A
+				 KeyBoardManager.hasKeyDown(68) && camera.moveRight(0.005 * elapsedTime);//D
+				 KeyBoardManager.hasKeyDown(81) && camera.moveVertical(0.005 * elapsedTime);//Q
+				 KeyBoardManager.hasKeyDown(69) && camera.moveVertical(-0.005 * elapsedTime);//E
 				
 				if (isMouseDown) {
 					var offsetX:Number = Laya.stage.mouseX - lastMouseX;
@@ -83,12 +85,15 @@ package com.components{
 			lastMouseX = Laya.stage.mouseX;
 			lastMouseY = Laya.stage.mouseY;
 		}
-		
+		public function dispose():void{
+			Laya.stage.off(Event.MOUSE_DOWN, this, mouseDown);
+			Laya.stage.off(Event.MOUSE_UP, this, mouseUp);
+			Laya.stage.off(Event.MOUSE_OUT, this, mouseOut);
+		}
 		protected function updateRotation():void {
-			//trace('position:>>>>>>>>>>>>>>>>'+camera.position.x,camera.position.y,camera.position.z,camera.transform.rotation.x,camera.transform.rotation.y,camera.transform.rotation.z);
 			var yprElem:Float32Array = yawPitchRoll.elements;
 			if (Math.abs(yprElem[1]) < 1.50) {
-				Quaternion.createFromYawPitchRoll(yprElem[0], 0, yprElem[2], tempRotationZ);
+				Quaternion.createFromYawPitchRoll(yprElem[0], yprElem[1], yprElem[2], tempRotationZ);
 				 tempRotationZ.cloneTo(camera.transform.localRotation);
 				 camera.transform.localRotation = camera.transform.localRotation;
 			}

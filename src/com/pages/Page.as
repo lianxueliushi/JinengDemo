@@ -8,15 +8,6 @@ package com.pages
 		{
 			super();
 		}
-		public function onDispose():void{
-			this.destroyChildren();
-			this.destroy();
-		}
-		
-		public function onCreate():void
-		{
-			// TODO Auto Generated method stub
-		}
 		
 	}
 }

@@ -34,14 +34,14 @@ package com.pages
 			_page=new GudingtuziPageUI();
 			this.addChild(_page);
 			_page.progbar.value=0;
-			_page.tip.changeText('请打开盒子');
+			Laya.timer.callLater(this,Main.showTip,["拖动鼠标打开盒子"]);
 			_page.box.on(Event.LABEL,this,onAnimationLabel);
 			_role=new DBTest();
 			_role.on('DRAGING',this,dragRoleing);
 			_role.on('BEGIN_DRAG',this,begindragRole);
 			_role.on('END_DRAG',this,enddragRole);
 			this.addChild(_role);
-			_role.pos(-430,200);
+			_role.pos(-100,200);
 			_role.alpha=0;
 			Laya.stage.on(Event.MOUSE_DOWN,this,beginDrag);
 			Laya.stage.on(Event.MOUSE_UP,this,endDrag);
@@ -81,7 +81,7 @@ package com.pages
 		{
 			// TODO Auto Generated method stub
 			trace('_role.x:'+_role.x,'_role.y:'+_role.y);
-			if(_role.x<260 && _role.x>160 && _role.y>-135 && _role.y<-108){
+			if(_role.x<288 && _role.x>160 && _role.y>-55 && _role.y<25){
 				_role.stopDrag();
 				_role.off('DRAGING',this,dragRoleing);
 				_role.off('BEGIN_DRAG',this,begindragRole);
@@ -90,7 +90,7 @@ package com.pages
 				_role.destroyChildren();
 				_role.destroy();
 				_page.box.gotoAndStop(27);
-				_page.tip.changeText("注意让兔子的头部露出盒子，并盖上盖子。");
+				Laya.timer.callLater(this,Main.showTip,["注意让兔子的头部露出盒子，并盖上盖子。"]);
 				_page.btn.on(Event.CLICK,this,closeBox);
 			}
 		}
@@ -102,7 +102,7 @@ package com.pages
 		{
 			// TODO Auto Generated method stub
 			trace("click");
-			_page.tip.changeText("做的很好，马上进入下一步，耳缘静脉注射");
+			Laya.timer.callLater(this,Main.showTip,["做的很好，马上进入下一步，耳缘静脉注射"]);
 			_page.box.gotoAndStop(28);
 			Laya.timer.once(3000,this,addPage);
 		}
@@ -123,7 +123,7 @@ package com.pages
 			if(_page.progbar.value<=0.7){
 				_page.progbar.value=0;
 				_page.box.gotoAndStop(0);
-				_page.tip.changeText("请打开盒子");
+				Laya.timer.callLater(this,Main.showTip,["拖动鼠标打开盒子"]);
 			}
 			else{
 				openBox();
@@ -161,12 +161,13 @@ package com.pages
 		private function openBox():void
 		{
 			// TODO Auto Generated method stub
-			_page.tip.changeText("盒子已经打开，请将兔子放到盒子里");
+			Laya.timer.callLater(this,Main.showTip,["请将兔子放到盒子里"]);
 			Laya.stage.off(Event.MOUSE_MOVE,this,DragBoxing);
 			Laya.stage.off(Event.MOUSE_DOWN,this,beginDrag);
 			Laya.stage.off(Event.MOUSE_UP,this,endDrag);
 			Laya.stage.off(Event.MOUSE_OUT,this,endDrag);
-			Tween.to(_role,{x:20,alpha:1},1000,Ease.backInOut);
+			Tween.to(_role,{x:20,alpha:1},600,Ease.backInOut);
+			Tween.to(_page,{x:_page.x+50},600);
 			_page.progbar.removeSelf();
 		}
 	}

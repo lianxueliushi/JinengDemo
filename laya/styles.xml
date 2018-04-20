@@ -1,4 +1,8 @@
 <res>
    <item name="comp/bg.png" type="Image" compress="0" pack="0" quality="80" props="sizeGrid=29,10,10,11" picType="0" scale="0"/>
    <item name="comp/vscroll.png" type="VScrollBar" compress="0" pack="0" quality="80" props="" picType="0" scale="0"/>
+   <item name="comp/linkbutton.png" type="Image" compress="0" pack="0" quality="80" props="sizeGrid=5,9,5,9" picType="0" scale="0"/>
+   <item name="comp/progress.png" type="ProgressBar" compress="0" pack="0" quality="80" props="sizeGrid=4,5,3,3" picType="0" scale="0"/>
+   <item name="comp/label.png" type="Label" compress="0" pack="0" quality="80" props="sizeGrid=3,7,5,6" picType="0" scale="0"/>
+   <item name="comp/button.png" type="Button" compress="0" pack="0" quality="80" props="sizeGrid=4,8,6,7" picType="0" scale="0"/>
 </res>

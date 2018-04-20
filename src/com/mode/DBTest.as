@@ -57,7 +57,6 @@ package com.mode
 				var rect:Rectangle=mc_shou.getBounds();
 				mc_shou.size(rect.width,rect.height);
 			}
-			this.size(800,600);
 			this.on(Event.MOUSE_DOWN,this,onThisdown);
 			var dragRect:Sprite=new Sprite();
 			dragRect.graphics.drawRect(0,0,100,40,'#ff0000');
@@ -68,8 +67,10 @@ package com.mode
 			skeleton.addChild(dragRect);
 			dragRect.on(Event.MOUSE_DOWN,this,onDown);
 			skeleton.on(Event.MOUSE_UP,this,onUp);
-//			skeleton.on(Event.MOUSE_OUT,this,onUp);
+			
 			this.addChild(skeleton);
+			this.size(800,600);
+			trace("兔子的尺寸："+skeleton.width,skeleton.height);
 			skeleton.play("stand",true);
 			skeleton.pos(400,300);
 		}
@@ -77,6 +78,7 @@ package com.mode
 		private function onThisdown(e:Event):void
 		{
 			// TODO Auto Generated method stub
+			trace('down:'+e.target.name);
 			if(e.target.name!="dragRect") event('WRONGDRAG');
 		}
 		

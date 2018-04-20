@@ -28,6 +28,8 @@ package com.components
 			trace("removed");
 			Laya.stage.off(Event.MOUSE_OUT,this,mouseUpHandler);
 			Laya.stage.off(Event.MOUSE_WHEEL,this,onWheel);
+			_mainRole.off(Event.MOUSE_DOWN,this,mouseDownHandler);
+			Laya.stage.off(Event.MOUSE_WHEEL,this,onWheel);
 		}
 		private function onWheel(e:Event):void
 		{

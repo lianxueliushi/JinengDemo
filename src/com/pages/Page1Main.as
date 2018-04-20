@@ -5,37 +5,39 @@ package com.pages
 	import com.mode.Tuzi_3D;
 	
 	import laya.events.Event;
-	import laya.ui.Button;
+	import laya.utils.Ease;
+	import laya.utils.Tween;
+	
+	import ui.Uipage1UI;
 	
 	public class Page1Main extends Page
 	{
+		private var skin:Uipage1UI;
 		public function Page1Main()
 		{
 			super();
-			var tuzi:Tuzi_3D=new Tuzi_3D();
+			skin=new Uipage1UI();
+			this.addChild(skin);
+			/*var tuzi:Tuzi_3D=new Tuzi_3D();
 			tuzi.name='tuzi';
 			this.addChild(tuzi);
 			tuzi.size(800,600);
 			trace("stagewidth:"+Laya.stage.width+"stageheight:"+Laya.stage.height);
 			tuzi.pos(120,60);
-			var drag:DragAndMove=new DragAndMove(tuzi);
+			var drag:DragAndMove=new DragAndMove(tuzi);*/
 			
-			
-			var btn:Button=new Button();
-			btn.name='btn';
-			btn.size(200,60);
-			btn.pos(450,600);
-			btn.label='第一步：捉拿称重';
-			btn.labelSize=20;
-			btn.on(Event.CLICK,this,onBegin);
-			this.addChild(btn);
+			skin.btnStart.on(Event.CLICK,this,onBegin);
+			onCreate();
 		}
 		
-		override public function onDispose():void
+		private function onCreate():void
 		{
-			super.onDispose();
+			// TODO Auto Generated method stub
+			skin.btnStart.alpha=0;
+			skin.btnStart.y=690;
+			Tween.from(skin.title,{scaleX:0.2,scaleY:0.2,y:500,alpha:0},1000,Ease.circInOut);
+			Tween.to(skin.btnStart,{y:590,alpha:1},1000,Ease.circInOut,null,600);
 		}
-		
 		private function onBegin():void
 		{
 			// TODO Auto Generated method stub
