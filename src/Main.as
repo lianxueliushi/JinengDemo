@@ -38,7 +38,6 @@
 		{
 			// TODO Auto Generated method stub
 			addPage('page1_3');
-			alert("这是一个测试");
 			mainTip||=new Label();
 			mainTip.width=Laya.stage.width*0.6;
 			mainTip.height=40;
