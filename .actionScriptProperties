@@ -33,13 +33,9 @@
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
-<<<<<<< HEAD
-  <applications/>
-=======
   <applications>
     <application path="Main.as"/>
   </applications>
->>>>>>> 1bda09f960f7b9f87a08e0b75c27fd84c46b78cb
   <modules/>
   <workers/>
   <buildCSSFiles/>

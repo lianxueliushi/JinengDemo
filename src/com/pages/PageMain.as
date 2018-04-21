@@ -13,17 +13,14 @@ package com.pages
 	import laya.display.Animation;
 	import laya.events.Event;
 	
-	import ui.ui.UimainUI;
+	import ui.ui.Uimain1UI;
 	
-	public class PageMain extends Page
+	public class PageMain extends Uimain1UI
 	{
 
 		private var ani:Animation;
-		private var ui:UimainUI;
 		public function PageMain()
 		{
-			ui=new UimainUI();
-			this.addChild(ui);
 			onCreate();
 		}
 		private function onCreate():void
@@ -37,7 +34,7 @@ package com.pages
 				trace(urls[i]);
 			}
 			ani.loadImages(urls);
-			ui.bg.addChild(ani);
+			bg.addChild(ani);
 			ani.once(Event.COMPLETE,this,playOver);
 			ani.play(0,false);
 			ani.scale(Laya.stage.width/640,Laya.stage.height/480);
@@ -53,7 +50,7 @@ package com.pages
 			ani.destroy();
 			var scene:Scene=new Scene();
 			//一定要加环境光，才能亮
-			ui.bg.addChild(scene);
+			bg.addChild(scene);
 			
 			var camera:Camera=new Camera();
 			camera. fieldOfView=55;
@@ -65,7 +62,7 @@ package com.pages
 			camera.sky=sky;
 			scene.addChild(camera);
 			var script:Component3D=camera.addComponent(CameraMoveScript);
-			ui.btnStart.once(Event.CLICK,this,function(){
+			btnStart.once(Event.CLICK,this,function(){
 				trace('removeComp');
 				script._destroy();
 				camera.removeAllComponent();
