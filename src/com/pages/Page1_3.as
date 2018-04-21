@@ -120,23 +120,33 @@ package com.pages
 		private function step3():void{
 			Main.showTip("请使用酒精棉球对家兔耳朵背侧边缘进行消毒处理");
 			img2.on(Event.MOUSE_DOWN,this,startXiaodu);
-			img2.on(Event.MOUSE_UP,this,endXiaodu);
+			img2.on(Event.MOUSE_UP,this,function(){
+				img2.off(Event.MOUSE_MOVE,this,xiaoduing);
+			});
 			xiaoduBg=new GraphBase();
 			img2.addChild(xiaoduBg);
 			xiaoduBg.alpha=0.6;
 		}
-		private function endXiaodu():void
-		{
-			// TODO Auto Generated method stub
-			img2.off(Event.MOUSE_MOVE,this,xiaoduing);
-		}
-		
 		private var xiaoduBg:GraphBase;
 		private function startXiaodu():void
 		{
 			// TODO Auto Generated method stub
+			Main.showTip("请对家兔耳朵背侧边缘进行消毒处理");
 			img2.on(Event.MOUSE_MOVE,this,xiaoduing);
 			xiaoduBg.begin(xiaoduBg.mouseX,xiaoduBg.mouseY);
+			Laya.timer.loop(100,this,checkXiaodu);
+		}
+		/**
+		 *检测消毒是否完成 
+		 * 
+		 */		
+		private function checkXiaodu():void
+		{
+			// TODO Auto Generated method stub
+			if(Laya.timer.currTimer==2000){//涂抹2秒判定涂抹完成
+				Main.showTip("消毒处理完毕");
+				Laya.timer.clear(this,checkXiaodu);
+			}
 		}
 		/**
 		 *消毒状态 
