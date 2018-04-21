@@ -1,12 +1,12 @@
 ﻿package {
 	import com.eventdispatcher.NGEventDispatcher;
-	import com.pages.Page;
 	import com.pages.Page1Main;
 	import com.pages.Page1_1;
 	import com.pages.Page1_2;
 	import com.pages.Page1_3;
 	import com.pages.PageMain;
 	
+	import laya.display.Node;
 	import laya.display.Sprite;
 	import laya.display.Stage;
 	import laya.ui.Label;
@@ -38,6 +38,7 @@
 		{
 			// TODO Auto Generated method stub
 			addPage('page1_3');
+			alert("这是一个测试");
 			mainTip||=new Label();
 			mainTip.width=Laya.stage.width*0.6;
 			mainTip.height=40;
@@ -56,11 +57,12 @@
 		 * @param $mes 要显示的信息
 		 * 
 		 */		
-		public static function showTip($mes:String,$autoHide:Boolean=true):void{
+		public static function showTip($mes:String):void{
 			mainTip.changeText($mes);
-			Tween.to(mainTip,{y:0,alpha:1},600,Ease.circInOut);
+			mainTip.y=0;
+			mainTip.alpha=1;
+			Tween.from(mainTip,{y:-100,alpha:0},600,Ease.circInOut);
 			Laya.stage.setChildIndex(mainTip,Laya.stage.numChildren-1);
-			if($autoHide) Laya.timer.once(3000,Main,hideTip);
 		}
 		/**
 		 *隐藏提示信息 
@@ -119,7 +121,7 @@
 		 * @param target
 		 * 
 		 */		
-		private function onDestory(target:Page):void
+		private function onDestory(target:Node):void
 		{
 			target.destroy();
 		}

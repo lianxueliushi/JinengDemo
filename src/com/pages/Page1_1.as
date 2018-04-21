@@ -14,10 +14,9 @@ package com.pages
 	 * @author Administrator
 	 * 
 	 */	
-	public class Page1_1 extends Page
+	public class Page1_1 extends ZhuotuziPageUI
 	{
 		private var tuzi:DBTest;
-		private var page:ZhuotuziPageUI;
 		public function Page1_1()
 		{
 			super();
@@ -27,9 +26,7 @@ package com.pages
 		private function onLoaded():void
 		{
 			// TODO Auto Generated method stub
-			page=new ZhuotuziPageUI();
-			this.addChild(page);
-			Laya.timer.callLater(this,Main.showTip,["右手抓起家兔颈背部皮肤向上提起时同时左手向下环抱拖住家兔臀部位置。"]);
+			Main.showTip("右手抓起家兔颈背部皮肤向上提起时同时左手向下环抱拖住家兔臀部位置。");
 			tuzi=new DBTest();
 			tuzi.pos(100,100);
 			tuzi.on('BEGIN_DRAG',this,beginDrag);
@@ -44,13 +41,13 @@ package com.pages
 			// TODO Auto Generated method stub
 			if(tuzi.x<944 && tuzi.x>=424 && tuzi.y>-200 && tuzi.y<0){
 				tuzi.onHit();
-				page.mc_dzc.gotoAndStop(1);
+				mc_dzc.gotoAndStop(1);
 				Tween.to(tuzi,{x:571,y:-20},100);
 				Laya.timer.callLater(this,Main.showTip,["兔子质量为：3.6Kg"]);
 				tuzi.stopDrag();
 				tuzi.off(Event.MOUSE_DOWN,this,wrongDrag);
 				tuzi.off(Event.MOUSE_UP,this,wrongDrag);
-				Laya.timer.once(3000,this,addPage);
+				Laya.timer.once(2000,this,addPage);
 			}
 		}
 		
@@ -58,20 +55,20 @@ package com.pages
 		{
 			// TODO Auto Generated method stub
 			tuzi.stopDrag();
-			Laya.timer.callLater(this,Main.showTip,["右手抓起家兔颈背部皮肤向上提起时同时左手向下环抱拖住家兔臀部位置。"]);
+			Main.showTip("右手抓起家兔颈背部皮肤向上提起时同时左手向下环抱拖住家兔臀部位置。");
 		}
 		
 		private function beginDrag():void
 		{
 			// TODO Auto Generated method stub
 			tuzi.startDrag();
-			Laya.timer.callLater(this,Main.showTip,["拖动到电子秤，对家兔进行称重。"]);
+			Main.showTip("拖动到电子秤，对家兔进行称重。");
 		}
 		//兔子身上按下，显示错误
 		private function wrongDrag(e:Event):void
 		{
 			// TODO Auto Generated method stub
-			Laya.timer.callLater(this,Main.showTip,["抓的位置不正确，请按照动画指示抓起"]);
+			Main.showTip("抓的位置不正确，请按照动画指示抓起");
 		}
 		private function addPage():void
 		{

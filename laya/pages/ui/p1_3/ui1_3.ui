@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":12,
+    "selecteID":19,
     "props":{"width":1280,"sceneColor":"#ffffff","height":720},
     "nodeParent":-1,
     "label":"View",
@@ -77,26 +77,104 @@
         {
             "x":15,
             "type":"Button",
-            "props":{"y":654,"x":939,"skin":"comp/button.png","label":"针管"},
+            "props":{"y":656,"x":945,"visible":false,"var":"btn_mazui","skin":"comp/button.png","label":"麻醉剂"},
             "nodeParent":1,
-            "label":"Button",
+            "label":"Button(btn_mazui)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "compId":11,
+            "compId":12,
             "child":[
                 ]
         },
         {
             "x":15,
             "type":"Button",
-            "props":{"y":655,"x":1035,"skin":"comp/button.png","label":"麻醉剂"},
+            "props":{"y":656,"x":945,"visible":false,"var":"btn_zhenguan","skin":"comp/button.png","label":"针管"},
             "nodeParent":1,
-            "label":"Button",
+            "label":"Button(btn_zhenguan)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "compId":12,
+            "compId":13,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "props":{"y":210,"x":380,"width":232,"visible":false,"var":"img_mzj","skin":"comp/img-mazuiji.jpg","height":351},
+            "nodeParent":1,
+            "label":"Image(img_mzj)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":14,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "props":{"y":144,"x":727,"visible":false,"var":"img_zhg","skin":"comp/img-zhenguan.jpg","scaleY":2,"scaleX":2},
+            "nodeParent":1,
+            "label":"Image(img_zhg)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":15,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Button",
+            "props":{"y":656,"x":945,"visible":false,"var":"btn_zhushou","skin":"comp/button.png","label":"助手"},
+            "nodeParent":1,
+            "label":"Button(btn_zhushou)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":16,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"ProgressBar",
+            "props":{"y":647,"x":443,"width":392,"visible":false,"var":"pro_jiliang","skin":"comp/progress.png","height":14},
+            "nodeParent":1,
+            "label":"ProgressBar(pro_jiliang)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":17,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Button",
+            "props":{"y":702,"x":1035,"width":184,"visible":false,"var":"btn_xiqu","skin":"comp/button.png","pivotY":20,"pivotX":92,"label":"点击开始吸取麻醉剂","height":43},
+            "nodeParent":1,
+            "label":"Button(btn_xiqu)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":18,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Label",
+            "props":{"y":671,"x":445,"width":389,"visible":false,"var":"txt_jiliang","height":12,"font":"20"},
+            "nodeParent":1,
+            "label":"Label(txt_jiliang)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":19,
             "child":[
                 ]
         }],
@@ -104,8 +182,8 @@
         {
             "nodes":[
                 ],
-            "name":"ani1",
-            "id":1,
+            "name":"ani2",
+            "id":2,
             "frameRate":24,
             "action":0
         }]

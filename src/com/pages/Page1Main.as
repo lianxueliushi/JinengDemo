@@ -10,14 +10,11 @@ package com.pages
 	
 	import ui.Uipage1UI;
 	
-	public class Page1Main extends Page
+	public class Page1Main extends Uipage1UI
 	{
-		private var skin:Uipage1UI;
 		public function Page1Main()
 		{
 			super();
-			skin=new Uipage1UI();
-			this.addChild(skin);
 			/*var tuzi:Tuzi_3D=new Tuzi_3D();
 			tuzi.name='tuzi';
 			this.addChild(tuzi);
@@ -26,17 +23,17 @@ package com.pages
 			tuzi.pos(120,60);
 			var drag:DragAndMove=new DragAndMove(tuzi);*/
 			
-			skin.btnStart.on(Event.CLICK,this,onBegin);
+			btnStart.on(Event.CLICK,this,onBegin);
 			onCreate();
 		}
 		
 		private function onCreate():void
 		{
 			// TODO Auto Generated method stub
-			skin.btnStart.alpha=0;
-			skin.btnStart.y=690;
-			Tween.from(skin.title,{scaleX:0.2,scaleY:0.2,y:500,alpha:0},1000,Ease.circInOut);
-			Tween.to(skin.btnStart,{y:590,alpha:1},1000,Ease.circInOut,null,600);
+			btnStart.alpha=0;
+			btnStart.y=690;
+			Tween.from(title,{scaleX:0.2,scaleY:0.2,y:500,alpha:0},1000,Ease.circInOut);
+			Tween.to(btnStart,{y:590,alpha:1},1000,Ease.circInOut,null,600);
 		}
 		private function onBegin():void
 		{

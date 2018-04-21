@@ -14,9 +14,8 @@ package com.pages
 	 * @author Administrator
 	 * 
 	 */	
-	public class Page1_2 extends Page
+	public class Page1_2 extends GudingtuziPageUI
 	{
-		private var _page:GudingtuziPageUI;
 		private var _role:DBTest;
 		public function Page1_2()
 		{
@@ -31,11 +30,9 @@ package com.pages
 		private function onLoaded():void
 		{
 			// TODO Auto Generated method stub
-			_page=new GudingtuziPageUI();
-			this.addChild(_page);
-			_page.progbar.value=0;
-			Laya.timer.callLater(this,Main.showTip,["拖动鼠标打开盒子"]);
-			_page.box.on(Event.LABEL,this,onAnimationLabel);
+			progbar.value=0;
+			Main.showTip("拖动鼠标打开盒子");
+			box.on(Event.LABEL,this,onAnimationLabel);
 			_role=new DBTest();
 			_role.on('DRAGING',this,dragRoleing);
 			_role.on('BEGIN_DRAG',this,begindragRole);
@@ -52,7 +49,7 @@ package com.pages
 		{
 			// TODO Auto Generated method stub
 			if(label=='opened'){
-				_page.box.gotoAndStop(26);
+				box.gotoAndStop(26);
 			}
 		}
 		/**
@@ -89,9 +86,9 @@ package com.pages
 				_role.onHit();
 				_role.destroyChildren();
 				_role.destroy();
-				_page.box.gotoAndStop(27);
-				Laya.timer.callLater(this,Main.showTip,["注意让兔子的头部露出盒子，并盖上盖子。"]);
-				_page.btn.on(Event.CLICK,this,closeBox);
+				box.gotoAndStop(27);
+				Main.showTip("注意让兔子的头部露出盒子，并盖上盖子。");
+				btn.on(Event.CLICK,this,closeBox);
 			}
 		}
 		/**
@@ -102,8 +99,8 @@ package com.pages
 		{
 			// TODO Auto Generated method stub
 			trace("click");
-			Laya.timer.callLater(this,Main.showTip,["做的很好，马上进入下一步，耳缘静脉注射"]);
-			_page.box.gotoAndStop(28);
+			Main.showTip("做的很好，马上进入下一步，耳缘静脉注射");
+			box.gotoAndStop(28);
 			Laya.timer.once(3000,this,addPage);
 		}
 		
@@ -120,10 +117,10 @@ package com.pages
 		{
 			// TODO Auto Generated method stub
 			Laya.stage.off(Event.MOUSE_MOVE,this,DragBoxing);
-			if(_page.progbar.value<=0.7){
-				_page.progbar.value=0;
-				_page.box.gotoAndStop(0);
-				Laya.timer.callLater(this,Main.showTip,["拖动鼠标打开盒子"]);
+			if(progbar.value<=0.7){
+				progbar.value=0;
+				box.gotoAndStop(0);
+				Main.showTip("拖动鼠标打开盒子");
 			}
 			else{
 				openBox();
@@ -148,10 +145,10 @@ package com.pages
 		{
 			// TODO Auto Generated method stub
 			var dis:Number=lastY-this.mouseY;
-			_page.progbar.value+=dis/100;
-			trace("index:"+Math.round(25*_page.progbar.value));
-			_page.box.gotoAndStop(Math.round(25*_page.progbar.value));
-			if(_page.progbar.value==1){
+			progbar.value+=dis/100;
+			trace("index:"+Math.round(25*progbar.value));
+			box.gotoAndStop(Math.round(25*progbar.value));
+			if(progbar.value==1){
 				openBox();
 				return ;
 			}
@@ -161,14 +158,14 @@ package com.pages
 		private function openBox():void
 		{
 			// TODO Auto Generated method stub
-			Laya.timer.callLater(this,Main.showTip,["请将兔子放到盒子里"]);
+			Main.showTip("请将兔子放到盒子里");
 			Laya.stage.off(Event.MOUSE_MOVE,this,DragBoxing);
 			Laya.stage.off(Event.MOUSE_DOWN,this,beginDrag);
 			Laya.stage.off(Event.MOUSE_UP,this,endDrag);
 			Laya.stage.off(Event.MOUSE_OUT,this,endDrag);
 			Tween.to(_role,{x:20,alpha:1},600,Ease.backInOut);
-			Tween.to(_page,{x:_page.x+50},600);
-			_page.progbar.removeSelf();
+			Tween.to(this,{x:x+50},600);
+			progbar.removeSelf();
 		}
 	}
 }  
