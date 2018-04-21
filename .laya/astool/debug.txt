@@ -1,2 +1,20 @@
-Project configuration:d:\Documents\myLayaaaaqaaaaaqqsaaaaaaaareqaaaaasaaqq/.actionScriptProperties.
+1,0.00,,0,Project command:d:\LayaworkSpace\JinengDemo/.actionScriptProperties;iflash=false;windowshow=false;chromerun=false;quickcompile=true
+Project configuration:d:\LayaworkSpace\JinengDemo/.actionScriptProperties.
+1,0.00,,0,output path:d:/LayaworkSpace/JinengDemo/bin/h5/
+1,0.00,,0,Main Class:d:/LayaworkSpace/JinengDemo/src/Main.as
+1,0.00,,0,output file:Main
+1,0.00,,0,compilerSourcePath d:/LayaworkSpace/JinengDemo/libs/laya/src/
+
+1,0.00,,0,Compile Path:d:/LayaworkSpace/JinengDemo/src/
+
+1,0.00,,0,Compile Path:d:/LayaworkSpace/JinengDemo/libs/laya/src/
+
+1,0.00,d:/LayaworkSpace/JinengDemo/src,0,Collect
+1,0.00,d:/LayaworkSpace/JinengDemo/libs/laya/src,0,Collect
+1,2.00,,0,read class message
+2,10.36,d:/LayaworkSpace/JinengDemo/src/com/pages/Page1_3.as,27,
+1,89.89,,0,Disable Flash3D d:/LayaworkSpace/JinengDemo/src/Main.as
+12,89.89,d:/LayaworkSpace/JinengDemo/bin/h5/Main.max.js,2771873,
+11,89.89,d:/LayaworkSpace/JinengDemo/bin/h5/Main.max.html,887,
 ******************************************************************************
+14,89.89,,0,

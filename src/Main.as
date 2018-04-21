@@ -6,6 +6,7 @@
 	import com.pages.Page1_3;
 	import com.pages.PageMain;
 	
+	import laya.ani.swf.MovieClip;
 	import laya.display.Node;
 	import laya.display.Sprite;
 	import laya.display.Stage;
@@ -56,12 +57,13 @@
 		 * @param $mes 要显示的信息
 		 * 
 		 */		
-		public static function showTip($mes:String):void{
+		public static function showTip($mes:String,$autoHide:Boolean=false,$time:int=2000):void{
 			mainTip.changeText($mes);
 			mainTip.y=0;
 			mainTip.alpha=1;
 			Tween.from(mainTip,{y:-100,alpha:0},600,Ease.circInOut);
 			Laya.stage.setChildIndex(mainTip,Laya.stage.numChildren-1);
+			if($autoHide) Laya.timer.once($time,Main,hideTip);
 		}
 		/**
 		 *隐藏提示信息 

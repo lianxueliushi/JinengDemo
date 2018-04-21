@@ -2,12 +2,15 @@ package com.pages
 {
 	import com.canvas.GraphBase;
 	
+	import laya.ani.swf.MovieClip;
+	import laya.display.Animation;
 	import laya.display.Sprite;
 	import laya.events.Event;
 	import laya.filters.BlurFilter;
-	import laya.ui.Image;
+	import laya.net.Loader;
 	import laya.utils.Ease;
 	import laya.utils.Handler;
+	import laya.utils.Mouse;
 	import laya.utils.Tween;
 	
 	import ui.ui.p1_3.ui1_3UI;
@@ -23,6 +26,13 @@ package com.pages
 		public function Page1_3()
 		{
 			super();
+			Laya.loader.load("p1_3/出血/序列-0319.jpg",Handler.create(this,onResReady));
+			
+		}
+		
+		private function onResReady():void
+		{
+			// TODO Auto Generated method stub
 			clickRect.on(Event.CLICK,this,onChooseTuzi);
 		}
 		/**
@@ -36,26 +46,20 @@ package com.pages
 			Tween.to(tuzi,{alpha:0},100,null,Handler.create(this,onScaleEnd),500);
 		}
 		private var mk:Sprite;
-
-		private var img1:Image;
 		/**
 		 *拔毛的次数，用来判定是否拔毛完成。这个判断不准确 
 		 */		
 		private var bamaoNumber:int;
-		private var img2:Image;
 		private function onScaleEnd():void
 		{
 			// TODO Auto Generated method stub
 			tuzi.destroy();
-			img1=new Image("res/tuzi/er/er1.jpg");
-			bg1.addChild(img1);
-			img1.size(1280,853);
-			
-			img2=new Image('res/tuzi/er/er2.jpg');
-			bg1.addChild(img2);
 			mk=new Sprite();
 			img2.mask=mk;
-			step1();
+			img1.visible=true;
+			img2.visible=true;
+//			step1();
+			step3();
 		}
 		/**
 		 *第一步：拔毛 
@@ -87,11 +91,11 @@ package com.pages
 			var m:Sprite=new Sprite();
 			m.graphics.drawCircle(-15,-15,30,30,'#ff0000');
 			m.scaleY=0.6;
-			m.pos(img1.mouseX,img1.mouseY);
+			m.pos(img2.mouseX,img2.mouseY);
 			var filter:BlurFilter=new BlurFilter(6);
 			m.filters=[filter];
 			mk.addChild(m);
-			trace("local:"+img1.mouseX,img1.mouseY);
+			trace("local:"+img2.mouseX,img2.mouseY);
 			trace("stage:"+Laya.stage.mouseX,Laya.stage.mouseY);
 			bamaoNumber++;
 			if(bamaoNumber==10){
@@ -105,11 +109,11 @@ package com.pages
 		private function tiaoGuobamao():void
 		{
 			// TODO Auto Generated method stub
+			Laya.timer.clear(this,tiaoGuobamao);
 			Main.showTip("拔毛完成");
 			img1.off(Event.MOUSE_DOWN,this,startBamao);
 			img1.off(Event.MOUSE_UP,this,endBamao);
 			mk.graphics.clear();
-			mk.destroy();
 			img2.mask=null;
 			Laya.timer.once(1000,this,step2);
 		}
@@ -119,34 +123,26 @@ package com.pages
 		 */		
 		private function step3():void{
 			Main.showTip("请使用酒精棉球对家兔耳朵背侧边缘进行消毒处理");
-			img2.on(Event.MOUSE_DOWN,this,startXiaodu);
-			img2.on(Event.MOUSE_UP,this,function(){
-				img2.off(Event.MOUSE_MOVE,this,xiaoduing);
+			img3.mouseThrough=true;
+			img3.on(Event.MOUSE_DOWN,this,startXiaodu);
+			m_img3wrong.on(Event.MOUSE_DOWN,this,function(e:Event){
+				if(e.target.name=="wrong"){
+					Main.showTip("请对家兔耳朵背侧边缘进行消毒处理",true,1000);
+				}
 			});
-			xiaoduBg=new GraphBase();
-			img2.addChild(xiaoduBg);
-			xiaoduBg.alpha=0.6;
+			img3.on(Event.MOUSE_UP,this,function(){
+				img3.off(Event.MOUSE_MOVE,this,xiaoduing);
+			});
+			img3.visible=true;
+			img3.visible=true;
+			mk.graphics.clear();
+			img3.mask=mk;
 		}
-		private var xiaoduBg:GraphBase;
-		private function startXiaodu():void
+		private function startXiaodu(e:Event):void
 		{
 			// TODO Auto Generated method stub
-			Main.showTip("请对家兔耳朵背侧边缘进行消毒处理");
-			img2.on(Event.MOUSE_MOVE,this,xiaoduing);
-			xiaoduBg.begin(xiaoduBg.mouseX,xiaoduBg.mouseY);
-			Laya.timer.loop(100,this,checkXiaodu);
-		}
-		/**
-		 *检测消毒是否完成 
-		 * 
-		 */		
-		private function checkXiaodu():void
-		{
-			// TODO Auto Generated method stub
-			if(Laya.timer.currTimer==2000){//涂抹2秒判定涂抹完成
-				Main.showTip("消毒处理完毕");
-				Laya.timer.clear(this,checkXiaodu);
-			}
+			trace(e.target.name);
+			img3.on(Event.MOUSE_MOVE,this,xiaoduing);
 		}
 		/**
 		 *消毒状态 
@@ -155,12 +151,144 @@ package com.pages
 		private function xiaoduing():void
 		{
 			// TODO Auto Generated method stub
-			/*var s:Sprite=new Sprite();
-			s.graphics.drawCircle(-5,-5,10,'#ffc600');
-			s.blendMode='lighter';
-			xiaoduBg.addChild(s);
-			s.pos(img2.mouseX,img2.mouseY);*/
-			xiaoduBg.draw(xiaoduBg.mouseX,xiaoduBg.mouseY);
+			trace("消毒……"+img3.mouseX,img3.mouseY);
+			var m:Sprite=new Sprite();
+			m.graphics.drawCircle(-20,-20,40,'#ff0000');
+			m.pos(img3.mouseX,img3.mouseY);
+			var filter:BlurFilter=new BlurFilter(6);
+			m.filters=[filter];
+			mk.addChild(m);
+			btn_xiaoduCom.visible=true;
+			btn_xiaoduCom.alpha=0;
+			Tween.to(btn_xiaoduCom,{y:600,alpha:1},600,Ease.circInOut);
+			btn_xiaoduCom.on(Event.CLICK,this,xiaoduEd);
+		}
+		/**
+		 *消毒完成 
+		 * 
+		 */		
+		private function xiaoduEd():void
+		{
+			// TODO Auto Generated method stub
+			Main.showTip("消毒处理完毕");
+			btn_xiaoduCom.visible=false;
+			img3.mask=null;
+			mk.graphics.clear();
+			mk.destroy();
+			
+			img2.destroy();
+			img3.offAll();
+			m_img3wrong.destroy();
+			Laya.timer.once(1000,this,step4);
+			
+		}
+		/**
+		 *注射 
+		 * 
+		 */		
+		private function step4():void
+		{
+			// TODO Auto Generated method stub
+			Main.showTip("请选择*号针头拖动至暴露的耳缘静脉位置");
+			tool_zhentou.visible=true;
+			tool_zhentou.y=720;
+			tool_zhentou.alpha=0;
+			Tween.to(tool_zhentou,{alpha:1,y:618},600);
+			zhentouList.selectHandler=new Handler(this,zhentouSelect);
+		}
+		
+		private function zhentouSelect(index:int):void
+		{
+			// TODO Auto Generated method stub
+			if(index==1){
+				Main.showTip("选择正确");
+				Tween.to(tool_zhentou,{y:720,alpha:0},600);
+				img_jiantou.visible=true;
+				mc_jiantou.play(0,true);
+//				img_zhentou.visible=true;
+//				img_zhentou.pos(mouseX,mouseY);
+				img_xueguan.visible=true;
+				btn_zhushe.visible=true;
+				btn_zhushe.on(Event.MOUSE_DOWN,this,chuxie);
+				Laya.stage.on(Event.MOUSE_UP,this,stopchuxie);
+				Laya.timer.frameLoop(1,this,moveZhentou);
+			}
+			else if(index==0){
+				Main.showTip("针头过小");
+			}
+			else if(index==2){
+				Main.showTip("针头过大");
+			}
+		}
+		/**
+		 *针头停止 移动
+		 * 
+		 */		
+		private function stopchuxie():void
+		{
+			// TODO Auto Generated method stub
+			Laya.timer.clear(this,zha);
+		}
+		
+		private function moveZhentou():void
+		{
+			// TODO Auto Generated method stub
+			//img_zhentou.pos(box_zhazhen.mouseX,box_zhazhen.mouseY);
+		}
+		/**
+		 *扎针 
+		 * 
+		 */		
+		private function chuxie():void
+		{
+			// TODO Auto Generated method stub
+			trace("click");
+			Laya.timer.clear(this,moveZhentou);
+			Laya.timer.frameLoop(1,this,zha);
+			
+			var mc:Animation=new Animation();
+			mc.loadImages(getUrls());
+			this.addChild(mc);
+			//mc.pos(box_zhazhen.mouseX,box_zhazhen.mouseY);
+			mc.play(0,false);
+			Laya.timer.once(1000,this,chuxieOver);
+//			mc.on(Event.COMPLETE,this,chuxieOver);
+			/*var mc:Sprite=new Sprite();
+			mc.graphics.drawCircle(0,0,4,"#660000");
+			mc.pivot(2,2);
+			this.addChild(mc);
+			mc.blendMode="lighter";
+			mc.pos(mouseX-20,mouseY+5);
+			mc.alpha=0;
+			Tween.to(mc,{scaleX:8,scaleY:8,alpha:1},800,Ease.circInOut);*/
+			
+			
+		}
+		
+		private function chuxieOver():void
+		{
+			// TODO Auto Generated method stub
+			Main.showTip("请助手缓慢推动注射器，麻醉完毕！");
+		}
+		private function getUrls():Array{
+			var temp:Array=[];
+			for (var i:int = 0; i < 14; i++) 
+			{
+				temp.push("p1_3/出血/序列-03"+(19+i)+".jpg");
+			}
+			return temp;
+		}
+		/**
+		 * 针头扎入
+		 * 
+		 */		
+		private function zha():void
+		{
+			// TODO Auto Generated method stub
+			img_zhentou.x-=0.05;
+			img_zhentou.y+=0.01;
+			box_zhazhen.setChildIndex(img_zhentou,box_zhazhen.getChildIndex(img_xueguan));
+			box_zhazhen.setChildIndex(img_xueguan,box_zhazhen.numChildren-1);
 		}
 		/**
 		 *准备麻醉剂 
@@ -229,8 +357,9 @@ package com.pages
 		{
 			// TODO Auto Generated method stub
 			btn_xiqu.visible=true;
-			Tween.to(img_zhg,{x:648,y:415,rotation:-154},600,Ease.circInOut);
-			Tween.to(btn_xiqu,{x:1035,y:673},600,Ease.circInOut);
+			Tween.to(img_zhg,{x:268,y:252,rotation:-144},600,Ease.circInOut);
+			Tween.to(btn_xiqu,{x:655,y:531},600,Ease.circInOut);
+			btn_mazui.visible=btn_zhushou.visible=btn_zhenguan.visible=false;
 			txt_jiliang.visible=true;
 			pro_jiliang.visible=true;
 			pro_jiliang.value=0;
@@ -262,7 +391,7 @@ package com.pages
 		private function xiquing():void
 		{
 			// TODO Auto Generated method stub
-			currJiliang+=0.1;
+			currJiliang+=0.3;
 			if(currJiliang>=jiliang){
 				Laya.timer.clear(this,xiquing);
 				btn_xiqu.off(Event.MOUSE_DOWN,this,onxiqu);

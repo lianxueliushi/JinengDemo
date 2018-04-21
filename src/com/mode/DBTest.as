@@ -25,12 +25,14 @@ package com.mode
 		 *指示动画 
 		 */		
 		private var zhishi:Animation;
+
+		private var dragRect:Sprite;
 		public function DBTest()
 		{
 			templet=new Templet();
 			templet.on(Event.COMPLETE,this,onParseCom);
 			templet.on(Event.ERROR,this,onParseError);
-			templet.loadAni('demo/Demo.sk');
+			templet.loadAni('res/tuzi/tuzi01.sk');
 		}
 		/**
 		 *DB动画加载完毕 
@@ -58,7 +60,7 @@ package com.mode
 				mc_shou.size(rect.width,rect.height);
 			}
 			this.on(Event.MOUSE_DOWN,this,onThisdown);
-			var dragRect:Sprite=new Sprite();
+			dragRect=new Sprite();
 			dragRect.graphics.drawRect(0,0,100,40,'#ff0000');
 			dragRect.alpha=0;
 			dragRect.pos(-70,-110);
@@ -71,7 +73,7 @@ package com.mode
 			this.addChild(skeleton);
 			this.size(800,600);
 			trace("兔子的尺寸："+skeleton.width,skeleton.height);
-			skeleton.play("stand",true);
+			skeleton.play("daiji",true);
 			skeleton.pos(400,300);
 		}
 		
@@ -104,8 +106,8 @@ package com.mode
 			// TODO Auto Generated method stub
 			if(e.target.name=='dragRect'){
 				event("BEGIN_DRAG");
-				skeleton.on(Event.LABEL,this,onLable);
-				skeleton.play("drag",false,true);
+//				skeleton.on(Event.LABEL,this,onLable);
+				skeleton.play("ti",false,true);
 				zhishi.visible=false;
 				mc_shou.visible=true;
 				mc_shou.pos(skeleton.mouseX,skeleton.mouseY);
@@ -121,6 +123,7 @@ package com.mode
 		private function onMove():void
 		{
 			// TODO Auto Generated method stub
+			skeleton.play("ti",false,false);
 			event("DRAGING");
 		}
 		private function onClick():void
@@ -145,8 +148,9 @@ package com.mode
 		public function onHit():void
 		{
 			// TODO Auto Generated method stub
-			skeleton.off(Event.MOUSE_UP,this,onUp);
-			skeleton.off(Event.MOUSE_DOWN,this,onDown);
+			dragRect.destroy();
+			this.off(Event.MOUSE_DOWN,this,onThisdown);
+			skeleton.offAll();
 			Laya.stage.off(Event.MOUSE_MOVE,this,onMove);
 			skeleton.play("fang",false,true);
 			mc_shou.play(0,false,"fang");
