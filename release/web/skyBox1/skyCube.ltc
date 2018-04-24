@@ -1,0 +1,9 @@
+{
+ "px": "123_FR.jpg",
+ "nx": "123_BK.jpg",
+ "py": "123_UP.jpg",
+ "ny": "123_DN.jpg",
+ "pz": "123_LF.jpg",
+ "nz": "123_RT.jpg",
+ "size": 512
+}

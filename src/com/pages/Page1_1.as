@@ -39,10 +39,11 @@ package com.pages
 		private function Draging(e:Event):void
 		{
 			// TODO Auto Generated method stub
-			if(tuzi.x<944 && tuzi.x>=424 && tuzi.y>-200 && tuzi.y<0){
+			trace("tuzi:"+tuzi.x,tuzi.y);
+			if(tuzi.x<680 && tuzi.x>=480 && tuzi.y>30 && tuzi.y<70){
 				tuzi.onHit();
 				mc_dzc.gotoAndStop(1);
-				Tween.to(tuzi,{x:571,y:-20},100);
+				Tween.to(tuzi,{x:585,y:32},100);
 				Laya.timer.callLater(this,Main.showTip,["兔子质量为：3.6Kg"]);
 				tuzi.stopDrag();
 				tuzi.off(Event.MOUSE_DOWN,this,wrongDrag);

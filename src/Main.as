@@ -3,7 +3,7 @@
 	import com.pages.Page1Main;
 	import com.pages.Page1_1;
 	import com.pages.Page1_2;
-	import com.pages.Page1_3;
+	import com.pages.Page2_1;
 	import com.pages.PageMain;
 	
 	import laya.ani.swf.MovieClip;
@@ -38,7 +38,7 @@
 		private function loadReady():void
 		{
 			// TODO Auto Generated method stub
-			addPage('page1_3');
+			addPage('page2_1');
 			mainTip||=new Label();
 			mainTip.width=Laya.stage.width*0.6;
 			mainTip.height=40;
@@ -101,9 +101,9 @@
 					newpage=new Page1_2();
 					break;
 				}
-				case 'page1_3':
+				case 'page2_1':
 				{
-					newpage=new Page1_3();
+					newpage=new Page2_1();
 					break;
 				}
 				default:

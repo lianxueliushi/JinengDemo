@@ -5,6 +5,7 @@ package com.pages
 	
 	import laya.events.Event;
 	import laya.utils.Ease;
+	import laya.utils.Handler;
 	import laya.utils.Tween;
 	
 	import ui.ui.p1_2.GudingtuziPageUI;
@@ -20,8 +21,8 @@ package com.pages
 		public function Page1_2()
 		{
 			super();
-//			Laya.loader.load('res/atlas/comp.atlas',Handler.create(this,onLoaded));
-			onLoaded();
+			Laya.loader.load('res/atlas/comp.atlas',Handler.create(this,onLoaded));
+//			onLoaded();
 		}
 		/**
 		 *资源加载完毕 
@@ -78,7 +79,7 @@ package com.pages
 		{
 			// TODO Auto Generated method stub
 			trace('_role.x:'+_role.x,'_role.y:'+_role.y);
-			if(_role.x<288 && _role.x>160 && _role.y>-55 && _role.y<25){
+			if(_role.x<288 && _role.x>160 && _role.y>-35 && _role.y<55){
 				_role.stopDrag();
 				_role.off('DRAGING',this,dragRoleing);
 				_role.off('BEGIN_DRAG',this,begindragRole);
@@ -101,13 +102,13 @@ package com.pages
 			trace("click");
 			Main.showTip("做的很好，马上进入下一步，耳缘静脉注射");
 			box.gotoAndStop(28);
-			Laya.timer.once(3000,this,addPage);
+			Laya.timer.once(1500,this,addPage);
 		}
 		
 		private function addPage():void
 		{
 			// TODO Auto Generated method stub
-			NGEventDispatcher.getInstance().event(NGEventDispatcher.SHOW_PAGE,'page1_3');
+			NGEventDispatcher.getInstance().event(NGEventDispatcher.SHOW_PAGE,'page2_1');
 		}
 		/**
 		 * 

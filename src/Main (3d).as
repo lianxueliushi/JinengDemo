@@ -5,7 +5,7 @@
 	import com.pages.Page1Main;
 	import com.pages.Page1_1;
 	import com.pages.Page1_2;
-	import com.pages.Page1_3;
+	import com.pages.Page2_1;
 	
 	import laya.d3.component.Component3D;
 	import laya.d3.core.BaseCamera;
@@ -145,7 +145,7 @@
 				}
 				case 'page1_3':
 				{
-					newpage=new Page1_3();
+					newpage=new Page2_1();
 					break;
 				}
 				default:
