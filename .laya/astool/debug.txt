@@ -13,7 +13,7 @@ Project configuration:d:\LayaworkSpace\JinengDemo/.actionScriptProperties.
 1,0.00,d:/LayaworkSpace/JinengDemo/libs/laya/src,0,Collect
 1,2.00,,0,read class message
 1,89.89,,0,Disable Flash3D d:/LayaworkSpace/JinengDemo/src/Main.as
-12,89.89,d:/LayaworkSpace/JinengDemo/bin/h5/Main.max.js,2797395,
+12,89.89,d:/LayaworkSpace/JinengDemo/bin/h5/Main.max.js,2797904,
 11,89.89,d:/LayaworkSpace/JinengDemo/bin/h5/Main.max.html,887,
 ******************************************************************************
 14,89.89,,0,

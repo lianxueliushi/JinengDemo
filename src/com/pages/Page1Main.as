@@ -8,9 +8,9 @@ package com.pages
 	import laya.utils.Ease;
 	import laya.utils.Tween;
 	
-	import ui.Uipage1UI;
+	import ui.UipageUI;
 	
-	public class Page1Main extends Uipage1UI
+	public class Page1Main extends UipageUI
 	{
 		public function Page1Main()
 		{

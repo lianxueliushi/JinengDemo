@@ -3,7 +3,7 @@ package com.mode
 	import laya.display.Sprite;
 	import laya.events.Event;
 	
-	import ui.ui.p1_1.DragTuziUI;
+	import ui.p1_1.DragTuziUI;
 	
 	public class Tuzi_Drag extends Sprite
 	{

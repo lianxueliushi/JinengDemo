@@ -7,7 +7,7 @@ package com.pages
 	import laya.utils.Handler;
 	import laya.utils.Tween;
 	
-	import ui.ui.p1_1.ZhuotuziPageUI;
+	import ui.p1_1.ZhuotuziPageUI;
 	
 	/**
 	 *捉拿称重 

@@ -1,8 +1,5 @@
 package com.pages
 {
-	import com.eventdispatcher.NGEventDispatcher;
-	
-	import laya.display.Animation;
 	import laya.display.Sprite;
 	import laya.events.Event;
 	import laya.filters.BlurFilter;
@@ -11,8 +8,8 @@ package com.pages
 	import laya.utils.Handler;
 	import laya.utils.Tween;
 	
-	import ui.ui.p2_1.ui2_1UI;
-	import ui.ui.p2_1.ui_jisuanUI;
+	import ui.p2_1.ui2_1UI;
+	import ui.p2_1.ui_jisuanUI;
 
 	/**
 	 *麻醉-静脉注射
@@ -26,6 +23,7 @@ package com.pages
 			super();
 //			Laya.loader.load("p2_1/出血/序列-0319.jpg",Handler.create(this,onResReady));
 			onResReady();
+			bg1.visible=false;
 		}
 		
 		private function onResReady():void
@@ -41,6 +39,7 @@ package com.pages
 		{
 			// TODO Auto Generated method stub
 			trace("clickTuziErduo");
+			bg1.visible=true;
 			Tween.to(tuzi,{scaleX:3,scaleY:3,x:-600,y:-100},600);
 			Tween.to(tuzi,{alpha:0},100,null,Handler.create(this,onScaleEnd),500);
 		}
@@ -57,8 +56,8 @@ package com.pages
 			img2.mask=mk;
 			img1.visible=true;
 			img2.visible=true;
-			step4();
-			// step3();
+			step1();
+//			 step3();
 		}
 		/**
 		 *第一步：拔毛  
@@ -122,6 +121,18 @@ package com.pages
 		 */		
 		private function step3():void{
 			Main.showTip("请使用酒精棉球对家兔耳朵背侧边缘进行消毒处理");
+			btn_xiaoduCom.visible=true;
+			btn_xiaoduCom.label="棉签";
+			btn_xiaoduCom.on(Event.CLICK,this,showMianqian);
+		}
+		
+		private function showMianqian():void
+		{
+			// TODO Auto Generated method stub
+			img_mianqian.visible=true;
+			img_mianqian.pos(bg1.mouseX,bg1.mouseY);
+			Laya.timer.frameLoop(1,this,movingMianqian);
+			img_mianqian.mouseEnabled=false;
 			img3.mouseThrough=true;
 			img3.on(Event.MOUSE_DOWN,this,startXiaodu);
 			m_img3wrong.on(Event.MOUSE_DOWN,this,function(e:Event){
@@ -131,6 +142,7 @@ package com.pages
 			});
 			img3.on(Event.MOUSE_UP,this,function(){
 				img3.off(Event.MOUSE_MOVE,this,xiaoduing);
+				if(img_mianqian) img_mianqian.scale(1,1);
 			});
 			img3.visible=true;
 			img3.visible=true;
@@ -140,31 +152,47 @@ package com.pages
 			
 			img3.mask=mk;
 		}
+		
+		private function movingMianqian():void
+		{
+			// TODO Auto Generated method stub
+			img_mianqian.pos(bg1.mouseX,bg1.mouseY);
+		}
 		private function startXiaodu(e:Event):void
 		{
 			// TODO Auto Generated method stub
-			trace(e.target.name);
-			img3.on(Event.MOUSE_MOVE,this,xiaoduing);
+			img_mianqian.scale(0.95,0.95);
+			if(e.target.name=="right"){
+				img3.on(Event.MOUSE_MOVE,this,xiaoduing);
+			}
+			
 		}
 		/**
 		 *消毒状态 
 		 * 
 		 */		
-		private function xiaoduing():void
+		private function xiaoduing(e:Event):void
 		{
 			// TODO Auto Generated method stub
 			trace("消毒……"+img3.mouseX,img3.mouseY);
 			var m:Sprite=new Sprite();
 			m.graphics.drawCircle(-20,-20,40,'#ff0000');
 			m.pos(img3.mouseX,img3.mouseY);
+			btn_xiaoduCom.off(Event.CLICK,this,showMianqian);
 			var filter:BlurFilter=new BlurFilter(6);
 			m.filters=[filter];
 			mk.addChild(m);
-			btn_xiaoduCom.visible=true;
+			btn_xiaoduCom.label="消毒完成";
 			btn_xiaoduCom.alpha=0;
-			btn_xiaoduCom.y=500;
-			Tween.to(btn_xiaoduCom,{y:600,alpha:1},600,Ease.circInOut);
+			btn_xiaoduCom.bottom=25;
+			Tween.to(btn_xiaoduCom,{y:btn_xiaoduCom.y-50,alpha:1},600,Ease.circInOut);
 			btn_xiaoduCom.on(Event.CLICK,this,xiaoduEd);
+			btn_xiaoduCom.on(Event.MOUSE_OVER,this,function(){
+				img_mianqian.visible=false;
+			});
+			btn_xiaoduCom.on(Event.MOUSE_OUT,this,function(){
+				img_mianqian.visible=true;
+			});
 		}
 		/**
 		 *消毒完成 
@@ -173,13 +201,14 @@ package com.pages
 		private function xiaoduEd():void
 		{
 			// TODO Auto Generated method stub
+			Laya.timer.clear(this,movingMianqian);
 			Main.showTip("消毒处理完毕");
+			btn_xiaoduCom.offAll();
 			btn_xiaoduCom.visible=false;
 			img3.mask=null;
 			mk.graphics.clear();
 			mk.destroy();
-			
-			img2.destroy();
+			img_mianqian.visible=false;
 			img3.offAll();
 			m_img3wrong.destroy();
 			Laya.timer.once(1000,this,step4);
@@ -333,10 +362,11 @@ package com.pages
 		{
 			// TODO Auto Generated method stub
 //			img_mianqiu.pos(mouseX,mouseY);
-			if(Math.abs(img_mianqiu.x-(img_zhentou.x-10))<=10 && Math.abs(img_mianqiu.y-(img_zhentou.y-5))<=5){
+			if(Math.abs(img_mianqiu.x-(img_zhentou.x-10))<=30 && Math.abs(img_mianqiu.y-(img_zhentou.y-5))<=20){
+				img_mianqiu.pos(img_zhentou.x-20,img_zhentou.y);
 				img_mianqiu.stopDrag();
 				Tween.to(img_mianqiu,{scaleX:0.5,scaleY:0.5},300);
-				var filter:GlowFilter=new GlowFilter("#ffff00",5);
+				var filter:GlowFilter=new GlowFilter("#ffcc00",5);
 				img_mianqiu.filters=[filter];
 				Laya.timer.clear(this,onMoveMianqiu);
 				Laya.timer.once(600,this,function(){img_mianqiu.filters=[]});
@@ -364,8 +394,8 @@ package com.pages
 			// TODO Auto Generated method stub
 			Main.showTip("请用棉球按压出血处，然后请助手推动麻醉剂注射针管");
 			btn_zhushou2.visible=true;
-			btn_zhushou2.alpha=1;
-			Tween.from(btn_zhushou2,{y:btn_zhushou2.y+60,alpha:0},600,null,null,400);
+			btn_zhushou2.alpha=0;
+			Tween.to(btn_zhushou2,{y:btn_zhushou2.y-60,alpha:1},600,null,null,400);
 			btn_zhushou2.once(Event.CLICK,this,onZhushou2);
 		}
 		/**
@@ -387,9 +417,11 @@ package com.pages
 			
 			btn_zhushe.visible=true;
 			btn_zhushe.alpha=0;
-			Tween.to(btn_zhushe,{x:btn_zhushe.x+120,alpha:1},600,Ease.circInOut);
+			btn_zhushe.y=btn_zhushou2.y;
+			Tween.to(btn_zhushe,{x:btn_zhushou2.x+120,alpha:1},600,Ease.circInOut);
 			btn_zhushe.on(Event.MOUSE_DOWN,this,zhusheHandler);
 			btn_zhushe.on(Event.MOUSE_UP,this,zhushePause);
+			txt_zhushepro.text='缓慢推动注射器，开始注射';
 		}
 		/***暂停注射**/		
 		private function zhushePause():void{Laya.timer.clear(this,zhusheIng);	}
@@ -500,6 +532,8 @@ package com.pages
 				Tween.to(btn_zhenguan,{x:btn_zhushou.x,alpha:0},600,Ease.circInOut);
 				Tween.to(btn_mazui,{x:btn_zhushou.x,alpha:0},600,Ease.circInOut,null,100);
 				zhushouShow=false;
+				btn_mazui.visible=false;
+				btn_zhenguan.visible=false;
 			}
 			else{//展开助手子按钮
 				zhushouShow=true;
@@ -507,8 +541,8 @@ package com.pages
 				btn_zhenguan.visible=true;
 				btn_mazui.alpha=0;
 				btn_zhenguan.alpha=0;
-				Tween.to(btn_zhenguan,{x:btn_zhushou.x+200,alpha:1},600,Ease.circInOut);
-				Tween.to(btn_mazui,{x:btn_zhushou.x+100,alpha:1},600,Ease.circInOut,null,100);
+				Tween.to(btn_zhenguan,{x:btn_zhushou.x+240,alpha:1},600,Ease.circInOut);
+				Tween.to(btn_mazui,{x:btn_zhushou.x+120,alpha:1},600,Ease.circInOut,null,100);
 			}
 			
 			btn_mazui.on(Event.CLICK,this,onChoosemazui);
@@ -523,7 +557,7 @@ package com.pages
 			// TODO Auto Generated method stub
 			if(zhenguanS && mzjS){
 				dialog=new ui_jisuanUI();
-				Laya.timer.once(600,dialog,dialog.show);
+				Laya.timer.once(1000,dialog,dialog.show);
 //				dialog.show();
 				dialog.rgroup.selectHandler=new Handler(this,onChoose);
 			}
@@ -556,7 +590,10 @@ package com.pages
 			// TODO Auto Generated method stub
 			btn_xiqu.visible=true;
 			Tween.to(img_zhg,{x:268,y:252,rotation:-144},600,Ease.circInOut);
-			Tween.to(btn_xiqu,{x:655,y:531},600,Ease.circInOut);
+			btn_xiqu.bottom=-50;
+			btn_xiqu.alpha=0;
+			btn_xiqu.right=0;
+			Tween.to(btn_xiqu,{alpha:1},600,Ease.circInOut);
 			btn_mazui.visible=btn_zhushou.visible=btn_zhenguan.visible=false;
 			btn_zhushou.off(Event.CLICK,this,onChoosezhushou);
 			txt_jiliang.visible=true;

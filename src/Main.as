@@ -16,6 +16,7 @@
 	import laya.utils.Stat;
 	import laya.utils.Tween;
 	import laya.webgl.WebGL;
+	import com.pages.Page2Main;
 
 	public class Main {
 		private var oldpage:Sprite;
@@ -38,7 +39,7 @@
 		private function loadReady():void
 		{
 			// TODO Auto Generated method stub
-			addPage('page2_1');
+			addPage('main');
 			mainTip||=new Label();
 			mainTip.width=Laya.stage.width*0.6;
 			mainTip.height=40;
@@ -90,6 +91,10 @@
 				}
 				case "page1":{
 					newpage=new Page1Main();
+					break;
+				}
+				case "page2":{
+					newpage=new Page2Main();
 					break;
 				}
 				case 'page1_1':{

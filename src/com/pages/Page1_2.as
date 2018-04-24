@@ -8,7 +8,7 @@ package com.pages
 	import laya.utils.Handler;
 	import laya.utils.Tween;
 	
-	import ui.ui.p1_2.GudingtuziPageUI;
+	import ui.p1_2.GudingtuziPageUI;
 	
 	/**
 	 *	兔盒固定 
@@ -108,7 +108,8 @@ package com.pages
 		private function addPage():void
 		{
 			// TODO Auto Generated method stub
-			NGEventDispatcher.getInstance().event(NGEventDispatcher.SHOW_PAGE,'page2_1');
+			Main.hideTip();
+			NGEventDispatcher.getInstance().event(NGEventDispatcher.SHOW_PAGE,'page2');
 		}
 		/**
 		 * 

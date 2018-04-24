@@ -45,13 +45,13 @@ package com.mode
 			skeleton=templet.buildArmature(0);
 			skeleton.name='skeleton';
 			zhishi=new Animation();
-			zhishi.loadAnimation("ui/p1_2/zhishi.ani");
+			zhishi.loadAnimation("p1_2/zhishi.ani");
 			zhishi.play();
 			zhishi.pos(-70,-110);
 			skeleton.addChild(zhishi);
 			
 			mc_shou=new Animation();
-			mc_shou.loadAnimation('ui/p1_2/shou.ani');
+			mc_shou.loadAnimation('p1_2/shou.ani');
 			mc_shou.stop();
 			skeleton.addChild(mc_shou);
 			mc_shou.mouseEnabled=false;

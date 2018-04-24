@@ -13,7 +13,7 @@ package com.pages
 	import laya.display.Animation;
 	import laya.events.Event;
 	
-	import ui.ui.Uimain1UI;
+	import ui.Uimain1UI;
 	
 	public class PageMain extends Uimain1UI
 	{
