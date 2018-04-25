@@ -125,11 +125,16 @@ package com.pages
 			// TODO Auto Generated method stub
 			Laya.stage.off(Event.MOUSE_MOVE,this,DragBoxing);
 			if(progbar.value<=0.7){
-				progbar.value=0;
+				/*progbar.value=0;
 				box.gotoAndStop(0);
-				Main.showTip("拖动鼠标打开盒子");
+				Main.showTip("拖动鼠标打开盒子");*/
+				box.wrapMode=1;
+				box.play(Math.round(progbar.value*(box.count-1)),false);
+				progbar.value=0;
 			}
 			else{
+				box.wrapMode=0;
+				box.play(Math.round(progbar.value*(box.count-1)),false);
 				openBox();
 			}
 		}

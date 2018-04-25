@@ -12,6 +12,8 @@ package com.pages
 	import laya.d3.resource.models.SkyBox;
 	import laya.display.Animation;
 	import laya.events.Event;
+	import laya.utils.Ease;
+	import laya.utils.Tween;
 	
 	import ui.Uimain1UI;
 	
@@ -28,16 +30,29 @@ package com.pages
 			// TODO Auto Generated method stub
 			ani=new Animation();
 			var urls:Array=[];
-			for (var i:int = 0; i < 14; i++) 
+			for (var i:int = 0; i < 201; i++) 
 			{
-				urls.push('yindaodonghua/0100'+(i<10?'0'+i:i)+".jpg");
+				urls.push('yindaodonghua/1'+format(i)+".jpg");
 				trace(urls[i]);
 			}
 			ani.loadImages(urls);
 			bg.addChild(ani);
 			ani.once(Event.COMPLETE,this,playOver);
 			ani.play(0,false);
-			ani.scale(Laya.stage.width/640,Laya.stage.height/480);
+			ani.scale(Laya.stage.width/1280,Laya.stage.height/720);
+			btnStart.visible=false;
+		}
+		
+		private function format(i:int):String
+		{
+			// TODO Auto Generated method stub
+			if(i>=100){
+				return i.toString();
+			}
+			else if(i>=10){
+				return "0"+i;
+			}
+			else return "00"+i;
 		}
 		/**
 		 *引导动画播放完毕 
@@ -47,7 +62,7 @@ package com.pages
 		{
 			// TODO Auto Generated method stub
 			trace('over');
-			ani.destroy();
+			
 			var scene:Scene=new Scene();
 			//一定要加环境光，才能亮
 			bg.addChild(scene);
@@ -62,7 +77,13 @@ package com.pages
 			camera.sky=sky;
 			scene.addChild(camera);
 			var script:Component3D=camera.addComponent(CameraMoveScript);
-			btnStart.once(Event.CLICK,this,function(){
+			btnStart.visible=true;
+			btnStart.alpha=0;
+			btnStart.bottom=0;
+			btnStart.x=(Laya.stage.width-btnStart.width)/2;
+			Tween.to(btnStart,{y:btnStart.y-200,alpha:1},600,Ease.circInOut);
+			btnStart.once(Event.CLICK,this,function():void
+			{
 				trace('removeComp');
 				script._destroy();
 				camera.removeAllComponent();
@@ -72,6 +93,7 @@ package com.pages
 				}
 				NGEventDispatcher.getInstance().event(NGEventDispatcher.SHOW_PAGE,'page1');
 			});
+//			ani.destroy();
 		}
 		
 		

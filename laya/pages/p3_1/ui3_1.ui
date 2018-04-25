@@ -2,8 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":2,
-    "props":{"width":1280,"sceneColor":"#ffffff","height":720},
+    "props":{"width":1920,"sceneColor":"#ffffff","height":720},
     "nodeParent":-1,
     "label":"View",
     "isOpen":true,
@@ -15,7 +14,7 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"y":55,"x":208,"width":841,"skin":"comp/sijiaochaotian.png","height":631},
+            "props":{"y":80,"x":213,"width":841,"skin":"comp/sijiaochaotian.png","height":631},
             "nodeParent":1,
             "label":"Image",
             "isDirectory":false,

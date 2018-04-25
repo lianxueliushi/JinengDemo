@@ -1,26 +1,25 @@
 ﻿package {
 	import com.eventdispatcher.NGEventDispatcher;
-	import com.pages.Page1Main;
 	import com.pages.Page1_1;
 	import com.pages.Page1_2;
-	import com.pages.Page2Main;
 	import com.pages.Page2_1;
+	import com.pages.Page3Main;
 	import com.pages.PageMain;
+	import com.pages.PageShouye;
 	
-	import laya.ani.swf.MovieClip;
-	import laya.device.motion.AccelerationInfo;
-	import laya.display.Animation;
 	import laya.display.Node;
 	import laya.display.Sprite;
 	import laya.display.Stage;
-	import laya.events.Event;
 	import laya.ui.Label;
 	import laya.utils.Ease;
 	import laya.utils.Handler;
 	import laya.utils.Stat;
 	import laya.utils.Tween;
 	import laya.webgl.WebGL;
-	import com.pages.Page3Main;
+	
+	import ui.UiGuodu1UI;
+	import ui.UiGuodu2UI;
+	import ui.UiGuodu3UI;
 
 	public class Main {
 		private var oldpage:Sprite;
@@ -28,13 +27,12 @@
 		public static var mainTip:Label;
 		public function Main() {
 			//初始化引擎
-			Laya3D.init(1280,720,WebGL);
-			Laya.stage.frameRate='mouse';
+			Laya3D.init(1920,1080,WebGL);
+//			Laya.stage.frameRate='mouse';
 			Stat.show();
-//			Laya.stage.scaleMode=Stage.SCALE_SHOWALL;
+			Laya.stage.scaleMode=Stage.SCALE_SHOWALL;
 			Laya.stage.alignH=Stage.ALIGN_CENTER;
 			Laya.stage.alignV=Stage.ALIGN_MIDDLE;
-			Laya.stage.bgColor='#ffffff';
 			//添加页面切换侦听
 			NGEventDispatcher.getInstance().on(NGEventDispatcher.SHOW_PAGE,this,addPage);
 			//加载资源
@@ -46,7 +44,7 @@
 			// TODO Auto Generated method stub
 			
 //			var db:DBControl=new DBControl();
-			addPage('main');
+			addPage('shouye');
 			mainTip||=new Label();
 			mainTip.width=Laya.stage.width*0.6;
 			mainTip.height=40;
@@ -96,16 +94,25 @@
 					newpage=new PageMain();
 					break ;
 				}
+				case "pageDaohang":
+				{
+					
+					break ;
+				}
+				case "shouye":{
+					newpage=new PageShouye();
+					break;
+				}
 				case "page1":{
-					newpage=new Page1Main();
+					newpage=new UiGuodu1UI();
 					break;
 				}
 				case "page2":{
-					newpage=new Page2Main();
+					newpage=new UiGuodu2UI();
 					break;
 				}
 				case "page3":{
-					newpage=new Page3Main();
+					newpage=new UiGuodu3UI();
 					break;
 				}
 				case 'page1_1':{
