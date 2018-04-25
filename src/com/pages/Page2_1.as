@@ -1,5 +1,7 @@
 package com.pages
 {
+	import com.eventdispatcher.NGEventDispatcher;
+	
 	import laya.display.Sprite;
 	import laya.events.Event;
 	import laya.filters.BlurFilter;
@@ -276,17 +278,21 @@ package com.pages
 			trace("click");
 			Laya.timer.clear(this,moveZhentou);
 			Laya.timer.frameLoop(1,this,zha);
-			img_jiantou.visible=false;
 			Laya.timer.once(400,this,function(){
+				box_zhazhen.setChildIndex(img_zhentou,box_zhazhen.getChildIndex(img_xueguan));
+				box_zhazhen.setChildIndex(img_xueguan,box_zhazhen.numChildren-2);
+			});
+			img_jiantou.visible=false;
+			Laya.timer.once(800,this,function(){
 				Laya.timer.clear(this,zha);
 				xuedi=new Sprite();
 				xuedi.graphics.drawCircle(0,0,4,"#660000");
 				xuedi.pivot(2,2);
 				box_zhazhen.addChild(xuedi);
-				xuedi.blendMode="lighter";
+//				xuedi.blendMode="lighter";
 				xuedi.pos(mouseX-10,mouseY+10);
 				xuedi.alpha=0;
-				Tween.to(xuedi,{scaleX:8,scaleY:8,alpha:1},800,Ease.circInOut);
+				Tween.to(xuedi,{scaleX:8,scaleY:8,alpha:1},1200,Ease.circInOut);
 				chuxieOver();
 			});
 //			var mc:Animation=new Animation();
@@ -310,11 +316,8 @@ package com.pages
 		private function zha():void
 		{
 			// TODO Auto Generated method stub
-			img_zhentou.x-=0.05;
-			img_zhentou.y+=0.01;
-			trace(img_zhentou.x,img_zhentou.y,Laya.timer.currFrame);
-			box_zhazhen.setChildIndex(img_zhentou,box_zhazhen.getChildIndex(img_xueguan));
-			box_zhazhen.setChildIndex(img_xueguan,box_zhazhen.numChildren-1);
+			img_zhentou.x-=0.1;
+			img_zhentou.y+=0.04;
 		}
 		/**
 		 *止血棉球 
@@ -483,6 +486,10 @@ package com.pages
 				img_mianqiu.off(Event.MOUSE_DOWN,this,onCaxueDown);
 				img_mianqiu.off(Event.MOUSE_UP,this,onCaxueUp);
 				Main.showTip("麻醉过程全部学习完毕！");
+				Laya.timer.once(1000,this,function()
+				{
+					NGEventDispatcher.getInstance().event(NGEventDispatcher.SHOW_PAGE,'page3');
+				});
 			}
 		}
 		/**
@@ -498,14 +505,14 @@ package com.pages
 			s.pivot(s.width/2,s.height/2);
 			s.pos(img_mianqiu.width/2,img_mianqiu.height/2);
 			img_mianqiu.addChild(s);
-			s.blendMode='lighter';
+//			s.blendMode='lighter';
 			s.alpha=0.1;
 			
 			xuedi.alpha-=0.1;
 			/*var f1:BlurFilter=new BlurFilter(4);
 			var f2:GlowFilter=new GlowFilter("#ff0000",5);
 			img_mianqiu.filters=[f1,f2];*/
-			Tween.to(img_mianqiu,{scaleX:0.45,scaleY:0.45},300);
+			Tween.to(img_mianqiu,{scaleX:0.45,scaleY:0.45},300,Ease.circInOut);
 		}
 		/**
 		 *准备麻醉剂 

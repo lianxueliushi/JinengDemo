@@ -3,20 +3,24 @@
 	import com.pages.Page1Main;
 	import com.pages.Page1_1;
 	import com.pages.Page1_2;
+	import com.pages.Page2Main;
 	import com.pages.Page2_1;
 	import com.pages.PageMain;
 	
 	import laya.ani.swf.MovieClip;
+	import laya.device.motion.AccelerationInfo;
+	import laya.display.Animation;
 	import laya.display.Node;
 	import laya.display.Sprite;
 	import laya.display.Stage;
+	import laya.events.Event;
 	import laya.ui.Label;
 	import laya.utils.Ease;
 	import laya.utils.Handler;
 	import laya.utils.Stat;
 	import laya.utils.Tween;
 	import laya.webgl.WebGL;
-	import com.pages.Page2Main;
+	import com.pages.Page3Main;
 
 	public class Main {
 		private var oldpage:Sprite;
@@ -34,17 +38,20 @@
 			//添加页面切换侦听
 			NGEventDispatcher.getInstance().on(NGEventDispatcher.SHOW_PAGE,this,addPage);
 			//加载资源
-			Laya.loader.load('res/atlas/comp.atlas',Handler.create(this,loadReady));
+			Laya.loader.load(['res/atlas/comp.atlas','res/atlas/box.atlas'],Handler.create(this,loadReady));
 		}
+		
 		private function loadReady():void
 		{
 			// TODO Auto Generated method stub
+			
+//			var db:DBControl=new DBControl();
 			addPage('main');
 			mainTip||=new Label();
 			mainTip.width=Laya.stage.width*0.6;
 			mainTip.height=40;
 			mainTip.left=0; 
-			mainTip.top=-100;
+			mainTip.top=-100; 
 			mainTip.alpha=0;
 			mainTip.fontSize=20;
 			mainTip.color='#ff0000';
@@ -95,6 +102,10 @@
 				}
 				case "page2":{
 					newpage=new Page2Main();
+					break;
+				}
+				case "page3":{
+					newpage=new Page3Main();
 					break;
 				}
 				case 'page1_1':{

@@ -21,8 +21,13 @@ package com.pages
 		public function Page1_2()
 		{
 			super();
-			Laya.loader.load('res/atlas/comp.atlas',Handler.create(this,onLoaded));
-//			onLoaded();
+			onLoaded();
+		}
+		
+		private function onError():void
+		{
+			// TODO Auto Generated method stub
+			trace("loadError")
 		}
 		/**
 		 *资源加载完毕 
@@ -148,8 +153,8 @@ package com.pages
 			// TODO Auto Generated method stub
 			var dis:Number=lastY-this.mouseY;
 			progbar.value+=dis/100;
-			trace("index:"+Math.round(25*progbar.value));
-			box.gotoAndStop(Math.round(25*progbar.value));
+			trace("index:"+Math.round(24*progbar.value));
+			box.gotoAndStop(Math.round(24*progbar.value));
 			if(progbar.value==1){
 				openBox();
 				return ;
