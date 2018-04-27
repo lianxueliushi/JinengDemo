@@ -77,8 +77,8 @@
 			mainTip.align="center";
 			mainTip.valign='middle';
 			Laya.stage.addChild(mainTip);
-			addPage(P_LOGIN);
-			// addPage("page1_2");
+			 addPage(P_LOGIN);
+//			addPage("page1_1");
 		}
 		/**
 		 * 弹出操作中的提示信息

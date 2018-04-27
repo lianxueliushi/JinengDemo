@@ -68,11 +68,24 @@ package com.pages
 			nav2.scrollBar.elasticDistance = 200;
 			nav2.scrollBar.showButtons=false;
 			btnStart.on(Event.CLICK,this,onClick);
+			
+			
+			btn_back.on(Event.CLICK,this,onBack);
+		}
+		
+		private function onBack():void
+		{
+			// TODO Auto Generated method stub
+			sky.onDispose();
+			sky.destroy();
+			NGEventDispatcher.getInstance().event(NGEventDispatcher.SHOW_PAGE,Main.P_SYMK);
 		}
 		private function onClick():void
 		{
 			// TODO Auto Generated method stub
+			trace("sky dispose");
 			sky.onDispose();
+			sky.destroy();
 			NGEventDispatcher.getInstance().event(NGEventDispatcher.SHOW_PAGE,Main.P_CJMY);
 		}
 		private function onSelect2(e:Event,index:Number):void

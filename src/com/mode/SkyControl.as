@@ -7,13 +7,14 @@ package com.mode
 	import laya.d3.core.Camera;
 	import laya.d3.core.MeshSprite3D;
 	import laya.d3.core.Sprite3D;
+	import laya.d3.core.light.DirectionLight;
 	import laya.d3.core.scene.Scene;
 	import laya.d3.math.Vector3;
 	import laya.d3.resource.TextureCube;
 	import laya.d3.resource.models.BoxMesh;
 	import laya.d3.resource.models.SkyBox;
 	import laya.display.Sprite;
-	import laya.d3.core.light.DirectionLight;
+	import laya.events.Event;
 	
 	public class SkyControl extends Sprite
 	{
@@ -58,8 +59,8 @@ package com.mode
 		private function mouseLeave():void
 		{
 			// TODO Auto Generated method stub
-			Laya.timer.clear(this,freeHandler);
-			Laya.timer.once(10*1000,this,freeHandler);
+			/*Laya.timer.clear(this,freeHandler);
+			Laya.timer.once(10*1000,this,freeHandler);*/
 		}
 		/**
 		 *自由旋转   
@@ -83,9 +84,14 @@ package com.mode
 			
 		}
 		public function onDispose():void{
+			trace("dispose");
 			script._destroy();
 			camera.removeAllComponent();
 			Laya.stage.offAll();
+			if(Laya.stage.hasListener(Event.MOUSE_DOWN)){
+				trace("移除失败");
+			}
+			Laya.timer.clear(this,rotate);
 		}
 	}
 }

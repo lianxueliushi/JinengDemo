@@ -1,23 +1,21 @@
 package com.pages
 {
-	import ui.UiDaohangUI;
-	import ui.p1_1.RabbitCageUI;
-	import laya.display.Animation;
-	import laya.utils.Handler;
-	import laya.events.Event;
-	import laya.display.Sprite;
-	import com.mode.DBTest;
 	import com.eventdispatcher.NGEventDispatcher;
-	import laya.utils.Tween;
+	import com.mode.DBTest;
+	
+	import laya.display.Animation;
+	import laya.display.Sprite;
+	import laya.events.Event;
 	import laya.maths.Point;
-	import laya.webgl.shapes.Ellipse;
+	
+	import ui.p1_1.RabbitCageUI;
 	
 	public class RabbitCage extends RabbitCageUI
 	{
 		private var lastY:Number;
-        private var bg:Sprite;
         private var bg1:Sprite;
         private var tuzi:DBTest;
+//		private var arrow:Animation;
         public function RabbitCage()
 		{
 			super();
@@ -26,14 +24,10 @@ package com.pages
 
         private function onLoaded():void
 		{
-            bg = new Sprite();
-            bg.loadImage("./rabbit-cage/rabbit-bg.png");
-            this.addChild(bg);
             Laya.stage.on(Event.MOUSE_DOWN,this,beginDrag);
 			Laya.stage.on(Event.MOUSE_UP,this,endDrag);
 			Laya.stage.on(Event.MOUSE_OUT,this,endDrag);
 
-			createRabbit();
 			surface.visible = true;
 		}
 
@@ -47,6 +41,8 @@ package com.pages
 				OpenGrabRabbit();
 				emptyCage.visible = true;
 				surface.visible = true;
+//				arrow.visible = true;
+//				arrow.play(0);
 			}
 			else{
 				i = 0.01;
@@ -68,6 +64,11 @@ package com.pages
 			// tuzi.on('DRAGING',this,Grabing);
 			// tuzi.on('WRONGDRAG',this,wrongGrab);
 			tuzi.pos(885,359);
+//			arrow = new Animation();
+//			arrow.loadAnimation("./p1_2/zhishi.ani");
+//			tuzi.addChild(arrow);
+//			arrow.pos(300,30);
+//			arrow.visible = false;
 			
             newRabbit.addChild(tuzi);
         }
@@ -91,19 +92,22 @@ package com.pages
 				tuzi.stopDrag();
 				tuzi.off(Event.MOUSE_DOWN,this,wrongGrab);
 				tuzi.off(Event.MOUSE_UP,this,wrongGrab);
-				Laya.timer.once(1000,this,addPage);
+				Laya.timer.once(2000,this,addPage);
 			}
 		}
 		
 		private function endGrab():void
 		{
 			tuzi.stopDrag();
+//			arrow.visible = true;
+//			arrow.play(0);
 			Main.showTip("右手抓起家兔颈背部皮肤向上提起时同时左手向下环抱拖住家兔臀部位置。");
 		}
 
 		private function beginGrab():void
 		{
 			tuzi.startDrag();
+//			arrow.visible = false;
 			Main.showTip("拖动到电子秤，对家兔进行称重。");
 		}
 		private function wrongGrab(e:Event):void
@@ -123,6 +127,8 @@ package com.pages
                 index = 24;
                 openBox();
 				OpenGrabRabbit();
+//				arrow.visible = true;
+//				arrow.play(0);
 				emptyCage.visible = true;
 				surface.visible = true;
             }
@@ -136,7 +142,8 @@ package com.pages
 		
 		private function openBox():void
 		{
-			// Main.showTip("请将兔子放到盒子里");
+			 Main.showTip("请将兔子放到盒子里");
+			createRabbit();
 			Laya.stage.off(Event.MOUSE_MOVE,this,DragBoxing);
 			Laya.stage.off(Event.MOUSE_DOWN,this,beginDrag);
 			Laya.stage.off(Event.MOUSE_UP,this,endDrag);

@@ -56,7 +56,7 @@ package com.components {
 		
 		protected function mouseUp(e:Event):void {
 			isMouseDown = false;
-			event("mouseUp");
+//			event("mouseUp");
 		}
 		
 		protected function mouseOut(e:Event):void {

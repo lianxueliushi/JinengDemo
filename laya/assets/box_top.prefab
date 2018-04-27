@@ -43,7 +43,7 @@
         {
             "x":15,
             "type":"Button",
-            "props":{"visible":true,"var":"btn_back","top":20,"stateNum":"2","skin":"menu-assets/btn_return.png","right":140,"presetID":4,"preset":"laya/assets/box_top.prefab"},
+            "props":{"visible":true,"var":"btn_back","top":21,"stateNum":"2","skin":"menu-assets/btn_return.png","right":98,"presetID":4,"preset":"laya/assets/box_top.prefab"},
             "nodeParent":1,
             "label":"Button(btn_back)",
             "isDirectory":false,
@@ -57,7 +57,7 @@
         {
             "x":15,
             "type":"Button",
-            "props":{"visible":true,"var":"btn_setting","top":20,"stateNum":"2","skin":"menu-assets/btn_system.png","right":230,"presetID":5,"preset":"laya/assets/box_top.prefab"},
+            "props":{"visible":true,"var":"btn_setting","top":21,"stateNum":"2","skin":"menu-assets/btn_system.png","right":173,"presetID":5,"preset":"laya/assets/box_top.prefab"},
             "nodeParent":1,
             "label":"Button(btn_setting)",
             "isDirectory":false,
@@ -71,7 +71,7 @@
         {
             "x":15,
             "type":"Button",
-            "props":{"visible":true,"var":"btn_exit","top":20,"stateNum":"2","skin":"menu-assets/btn_exit.png","right":50,"presetID":6,"preset":"laya/assets/box_top.prefab"},
+            "props":{"visible":true,"var":"btn_exit","top":21,"stateNum":"2","skin":"menu-assets/btn_exit.png","right":22,"presetID":6,"preset":"laya/assets/box_top.prefab"},
             "nodeParent":1,
             "label":"Button(btn_exit)",
             "isDirectory":false,
@@ -81,6 +81,19 @@
             "child":[
                 ],
             "$HIDDEN":false
+        },
+        {
+            "x":15,
+            "type":"Button",
+            "props":{"y":23,"x":1609,"stateNum":"1","skin":"scene-assets/btn_user.png"},
+            "nodeParent":1,
+            "label":"Button",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":8,
+            "child":[
+                ]
         }],
     "animations":[
         {

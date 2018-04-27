@@ -43,8 +43,8 @@ package com.mode
 			zhishi=new Animation();
 			zhishi.loadAnimation("p1_2/zhishi.ani");
 			zhishi.play();
-			zhishi.pos(-70,-110);
-//			skeleton.addChild(zhishi);
+			zhishi.pos(-90,-260);
+			skeleton.addChild(zhishi);
 			
 			this.on(Event.MOUSE_DOWN,this,onThisdown);
 			dragRect=new Sprite();
@@ -137,6 +137,7 @@ package com.mode
 			Laya.stage.off(Event.MOUSE_MOVE,this,onMove);
 			skeleton.play("fang",false,true);
 			zhishi.visible=false;
+			zhishi.stop();
 		}
 	}
 }
