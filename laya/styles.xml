@@ -30,4 +30,51 @@
    <item name="box/020022.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
    <item name="box/020023.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
    <item name="box/020024.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="template/List/SimpleListBoxItemBackground.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="template/List/arrow.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="template/List/label.png" type="Label" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="template/List/message icon_57x57.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="template/List/vscroll.png" type="VScrollBar" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="template/PageBar/btn_pageIndicator.png" type="Button" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="template/PageBar/pageIndicatorBack.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="menu-assets/btn_in.png" type="Button" compress="0" pack="0" quality="80" props="sizeGrid=12,15,22,14" picType="0" scale="0"/>
+   <item name="menu-assets/select_bg.png" type="Image" compress="0" pack="0" quality="80" props="sizeGrid=12,11,18,10" picType="0" scale="0"/>
+   <item name="menu-assets/img_footbg.png" type="Image" compress="0" pack="0" quality="80" props="sizeGrid=4,5,3,4" picType="0" scale="0"/>
+   <item name="login-assets/input_txt.png" type="TextInput" compress="0" pack="0" quality="80" props="sizeGrid=12,13,16,10" picType="0" scale="0"/>
+   <item name="menu-assets/btn_login.png" type="Button" compress="0" pack="0" quality="80" props="sizeGrid=10,14,18,13" picType="0" scale="0"/>
+   <item name="menu-assets/input_txt.png" type="TextInput" compress="0" pack="0" quality="80" props="sizeGrid=15,11,15,10" picType="0" scale="0"/>
+   <item name="login-assets/login_box.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="menu-assets/btn_homebtn.png" type="Button" compress="0" pack="0" quality="80" props="sizeGrid=12,14,12,12" picType="0" scale="0"/>
+   <item name="rabbit-cage" type="" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00000.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00001.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00002.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00003.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00004.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00005.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00006.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00007.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00008.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00009.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00010.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00011.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00012.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00013.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00014.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00015.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00016.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00017.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00018.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00019.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00020.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00021.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00022.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00023.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/1_00024.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/Dzicheng0.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/Dzicheng1.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/cage-surface.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/rabbit-bg.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/rabbit-cage.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="rabbit-cage/rabbit.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
 </res>

@@ -4,12 +4,15 @@
 	import com.pages.Page1_2;
 	import com.pages.Page2_1;
 	import com.pages.Page3Main;
-	import com.pages.PageMain;
-	import com.pages.PageShouye;
+	import com.pages.PageLogin;
+	import com.pages.PageManyou;
+	import com.pages.PageMokuai;
+	import com.pages.PageShiyanleixing;
 	
 	import laya.display.Node;
 	import laya.display.Sprite;
 	import laya.display.Stage;
+	import laya.media.SoundManager;
 	import laya.ui.Label;
 	import laya.utils.Ease;
 	import laya.utils.Handler;
@@ -20,8 +23,26 @@
 	import ui.UiGuodu1UI;
 	import ui.UiGuodu2UI;
 	import ui.UiGuodu3UI;
+	import com.pages.RabbitCage;
 
 	public class Main {
+		/**
+		 *实验类型 
+		 */		
+		public static const P_SYLX:String="pageshiyanleixing";
+		/**
+		 *场景漫游 
+		 */		
+		public static const P_CJMY:String="pagechangjingmanyou";
+		/**
+		 *登陆页面 
+		 */		
+		public static const P_LOGIN:String="pagelogin";
+		/**
+		 *实验模块 
+		 */		
+		public static const P_SYMK:String="pageshiyanmokuai";
+		
 		private var oldpage:Sprite;
 		/**场景中通用的提示信息***/
 		public static var mainTip:Label;
@@ -36,7 +57,7 @@
 			//添加页面切换侦听
 			NGEventDispatcher.getInstance().on(NGEventDispatcher.SHOW_PAGE,this,addPage);
 			//加载资源
-			Laya.loader.load(['res/atlas/comp.atlas','res/atlas/box.atlas'],Handler.create(this,loadReady));
+			Laya.loader.load(['res/atlas/comp.atlas','res/atlas/box.atlas','res/atlas/rabbit-cage.atlas',"res/atlas/menu-assets.atlas","menu-assets/btn_teach.png","menu-assets/btn_practice.png","menu-assets/btn_exam.png",'comp/dianzicheng.png','comp/dianzicheng-s.png'],Handler.create(this,loadReady));
 		}
 		
 		private function loadReady():void
@@ -44,7 +65,6 @@
 			// TODO Auto Generated method stub
 			
 //			var db:DBControl=new DBControl();
-			addPage('shouye');
 			mainTip||=new Label();
 			mainTip.width=Laya.stage.width*0.6;
 			mainTip.height=40;
@@ -57,6 +77,8 @@
 			mainTip.align="center";
 			mainTip.valign='middle';
 			Laya.stage.addChild(mainTip);
+			addPage(P_LOGIN);
+			// addPage("page1_2");
 		}
 		/**
 		 * 弹出操作中的提示信息
@@ -90,17 +112,26 @@
 			var newpage:Sprite;
 			switch($pageName)
 			{
-				case "main":{
-					newpage=new PageMain();
-					break ;
-				}
-				case "pageDaohang":
+				//登陆
+				case P_LOGIN:
 				{
-					
+					newpage=new PageLogin();
 					break ;
 				}
-				case "shouye":{
-					newpage=new PageShouye();
+				//进入场景
+				case P_CJMY:{
+					newpage=new PageManyou();
+					break ;
+				}
+				//选择实验类型
+				case P_SYLX:
+				{
+					newpage=new PageShiyanleixing();
+					break ;
+				}
+				//选择模块
+				case P_SYMK:{
+					newpage=new PageMokuai();
 					break;
 				}
 				case "page1":{
@@ -116,7 +147,7 @@
 					break;
 				}
 				case 'page1_1':{
-					newpage=new Page1_1();
+					newpage=new RabbitCage();
 					break;
 				}
 				case 'page1_2':

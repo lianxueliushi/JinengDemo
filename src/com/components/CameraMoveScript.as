@@ -56,6 +56,7 @@ package com.components {
 		
 		protected function mouseUp(e:Event):void {
 			isMouseDown = false;
+			event("mouseUp");
 		}
 		
 		protected function mouseOut(e:Event):void {
@@ -78,7 +79,7 @@ package com.components {
 					
 					var yprElem:Float32Array = yawPitchRoll.elements;
 					yprElem[0] -= offsetX * rotaionSpeed * elapsedTime;
-					yprElem[1] -= offsetY * rotaionSpeed * elapsedTime;
+//					yprElem[1] -= offsetY * rotaionSpeed * elapsedTime;
 					updateRotation();
 				}
 			}

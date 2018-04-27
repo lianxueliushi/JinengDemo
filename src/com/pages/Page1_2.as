@@ -3,6 +3,9 @@ package com.pages
 	import com.eventdispatcher.NGEventDispatcher;
 	import com.mode.DBTest;
 	
+	import laya.ani.bone.Skeleton;
+	import laya.ani.bone.Templet;
+	import laya.d3.core.particleShuriKen.module.shape.BoxShape;
 	import laya.events.Event;
 	import laya.utils.Ease;
 	import laya.utils.Handler;
@@ -44,7 +47,7 @@ package com.pages
 			_role.on('BEGIN_DRAG',this,begindragRole);
 			_role.on('END_DRAG',this,enddragRole);
 			this.addChild(_role);
-			_role.pos(-100,200);
+			_role.pos(-100,box_tuzi.y-300);
 			_role.alpha=0;
 			Laya.stage.on(Event.MOUSE_DOWN,this,beginDrag);
 			Laya.stage.on(Event.MOUSE_UP,this,endDrag);
@@ -66,6 +69,24 @@ package com.pages
 		{
 			// TODO Auto Generated method stub
 			_role.stopDrag();
+			if(Math.abs(_role.x+400-box_hezi.x)<100 && (_role.y+300-box_hezi.y)<100){
+				_role.stopDrag();
+				_role.off('DRAGING',this,dragRoleing);
+				_role.off('BEGIN_DRAG',this,begindragRole);
+				_role.off('END_DRAG',this,enddragRole);
+				_role.onHit();
+				_role.destroyChildren();
+				_role.destroy();
+				//				box.gotoAndStop(27);
+				
+				fangHezi=new Templet();
+				fangHezi.on(Event.COMPLETE,this,onParseCom);
+				fangHezi.on(Event.ERROR,this,onParseError);
+				fangHezi.loadAni('p1_2/fangruhezi.sk');
+				Main.showTip("合上盒子。");
+				
+				btnClose.on(Event.CLICK,this,closeHalfBox);
+			}
 		}
 		/**
 		 *开始拖动角色
@@ -84,29 +105,47 @@ package com.pages
 		{
 			// TODO Auto Generated method stub
 			trace('_role.x:'+_role.x,'_role.y:'+_role.y);
-			if(_role.x<288 && _role.x>160 && _role.y>-35 && _role.y<55){
-				_role.stopDrag();
-				_role.off('DRAGING',this,dragRoleing);
-				_role.off('BEGIN_DRAG',this,begindragRole);
-				_role.off('END_DRAG',this,enddragRole);
-				_role.onHit();
-				_role.destroyChildren();
-				_role.destroy();
-				box.gotoAndStop(27);
-				Main.showTip("注意让兔子的头部露出盒子，并盖上盖子。");
-				btn.on(Event.CLICK,this,closeBox);
-			}
 		}
 		/**
-		 *合上箱子 
+		 *第二个视角——抓起耳朵，盖上盖子 
 		 * 
 		 */		
-		private function closeBox():void
+		private function onTurn():void
+		{
+			// TODO Auto Generated method stub
+			box.stop();
+			box1.visible=false;
+		}
+		
+		private function onParseError():void
+		{
+			// TODO Auto Generated method stub
+			
+		}
+		
+		private function onParseCom():void
+		{
+			// TODO Auto Generated method stub
+			fangheziSkeleton=fangHezi.buildArmature(0);
+			fangheziSkeleton.play(0,false);
+			box_hezi.addChild(fangheziSkeleton);
+			fangheziSkeleton.pos(box.x,box.y);
+		}
+		/**
+		 *合上一半盒子 
+		 * 
+		 */		
+		private function closeHalfBox():void
 		{
 			// TODO Auto Generated method stub
 			trace("click");
-			Main.showTip("做的很好，马上进入下一步，耳缘静脉注射");
-			box.gotoAndStop(28);
+			box.wrapMode=1;
+			box.addLabel("turn",5);
+			box.on(Event.LABEL,this,onTurn);
+			box.play(Math.round(progbar.value*(box.count-1)),false);
+			
+			/*Main.showTip("做的很好，马上进入下一步，耳缘静脉注射");
+			box.gotoAndStop(28);*/
 			Laya.timer.once(1500,this,addPage);
 		}
 		
@@ -124,7 +163,7 @@ package com.pages
 		{
 			// TODO Auto Generated method stub
 			Laya.stage.off(Event.MOUSE_MOVE,this,DragBoxing);
-			if(progbar.value<=0.7){
+			if(progbar.value<=0.5){
 				/*progbar.value=0;
 				box.gotoAndStop(0);
 				Main.showTip("拖动鼠标打开盒子");*/
@@ -139,6 +178,8 @@ package com.pages
 			}
 		}
 		private var lastY:Number;
+		private var fangHezi:Templet;
+		private var fangheziSkeleton:Skeleton;
 		/**
 		 * 开始拖动盒子   鼠标上下拖动 模拟开箱动作
 		 * 
@@ -175,8 +216,8 @@ package com.pages
 			Laya.stage.off(Event.MOUSE_DOWN,this,beginDrag);
 			Laya.stage.off(Event.MOUSE_UP,this,endDrag);
 			Laya.stage.off(Event.MOUSE_OUT,this,endDrag);
-			Tween.to(_role,{x:20,alpha:1},600,Ease.backInOut);
-			Tween.to(this,{x:x+50},600);
+			Tween.to(_role,{x:box_tuzi.x-400,y:box_tuzi.y-300,alpha:1},600,Ease.backInOut);
+//			Tween.to(this,{x:x+50},600);
 			progbar.removeSelf();
 		}
 	}

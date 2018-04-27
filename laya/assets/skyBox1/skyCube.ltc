@@ -1,0 +1,9 @@
+{
+ "px": "04_FR.jpg",
+ "nx": "04_BK.jpg",
+ "py": "04_UP.jpg",
+ "ny": "04_DN.jpg",
+ "pz": "04_LF.jpg",
+ "nz": "04_RT.jpg",
+ "size": 512
+}

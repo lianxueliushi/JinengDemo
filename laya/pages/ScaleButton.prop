@@ -1,0 +1,11 @@
+<ScaleButton className="script.ScaleButton">
+	<!--<prop name="xxx" tips="数字类型" type="number"/>
+	<prop name="xxx" tips="整数类型" type="int"/>
+	<prop name="xxx" tips="字符串类型" type="string"/>
+	<prop name="xxx" tips="布尔类型" type="bool"/>
+	<prop name="xxx" tips="颜色类型" type="color"/>
+	<prop name="xxx" tips="下拉框类型" type="option" option="left,center,right"/>-->
+	<prop name="scaleNum" tips="缩放倍数" type="number"/>
+	<prop name="oversoundurl" tips="鼠标划过声音" type="string"/>
+	<prop name="clicksoundurl" tips="鼠标点击声音" type="string"/>
+</ScaleButton>

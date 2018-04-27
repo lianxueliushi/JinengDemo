@@ -14,10 +14,6 @@ package com.mode
 		private var templet:Templet;
 		public var skeleton:Skeleton;
 		/**
-		 *手动画 
-		 */		
-		private var mc_shou:Animation;
-		/**
 		 *当前动画索引 
 		 */		
 		private var index:Number=0;
@@ -32,7 +28,7 @@ package com.mode
 			templet=new Templet();
 			templet.on(Event.COMPLETE,this,onParseCom);
 			templet.on(Event.ERROR,this,onParseError);
-			templet.loadAni('res/tuzi/tuzi01.sk');
+			templet.loadAni('tuzi/tuzi.sk');
 		}
 		/**
 		 *DB动画加载完毕 
@@ -48,17 +44,8 @@ package com.mode
 			zhishi.loadAnimation("p1_2/zhishi.ani");
 			zhishi.play();
 			zhishi.pos(-70,-110);
-			skeleton.addChild(zhishi);
+//			skeleton.addChild(zhishi);
 			
-			mc_shou=new Animation();
-			mc_shou.loadAnimation('p1_2/shou.ani');
-			mc_shou.stop();
-			skeleton.addChild(mc_shou);
-			mc_shou.mouseEnabled=false;
-			if(!mc_shou.width){
-				var rect:Rectangle=mc_shou.getBounds();
-				mc_shou.size(rect.width,rect.height);
-			}
 			this.on(Event.MOUSE_DOWN,this,onThisdown);
 			dragRect=new Sprite();
 			dragRect.graphics.drawRect(0,0,100,40,'#ff0000');
@@ -97,7 +84,6 @@ package com.mode
 			// TODO Auto Generated method stub
 				skeleton.play("fang",false,true);
 				zhishi.visible=true;
-				mc_shou.play(0,false,"fang");
 				Laya.stage.off(Event.MOUSE_MOVE,this,onMove);
 				event("END_DRAG");
 		}
@@ -109,9 +95,6 @@ package com.mode
 //				skeleton.on(Event.LABEL,this,onLable);
 				skeleton.play("ti",false,true);
 				zhishi.visible=false;
-				mc_shou.visible=true;
-				mc_shou.pos(skeleton.mouseX,skeleton.mouseY);
-				mc_shou.play(0,false,"zhua");
 				Laya.stage.on(Event.MOUSE_MOVE,this,onMove);
 			}
 			else{
@@ -153,7 +136,6 @@ package com.mode
 			skeleton.offAll();
 			Laya.stage.off(Event.MOUSE_MOVE,this,onMove);
 			skeleton.play("fang",false,true);
-			mc_shou.play(0,false,"fang");
 			zhishi.visible=false;
 		}
 	}
