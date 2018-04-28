@@ -1,13 +1,12 @@
 ﻿package {
 	import com.eventdispatcher.NGEventDispatcher;
-	import com.pages.Page1_1;
 	import com.pages.Page1_2;
 	import com.pages.Page2_1;
-	import com.pages.Page3Main;
 	import com.pages.PageLogin;
 	import com.pages.PageManyou;
 	import com.pages.PageMokuai;
 	import com.pages.PageShiyanleixing;
+	import com.pages.RabbitCage;
 	
 	import laya.display.Node;
 	import laya.display.Sprite;
@@ -23,7 +22,6 @@
 	import ui.UiGuodu1UI;
 	import ui.UiGuodu2UI;
 	import ui.UiGuodu3UI;
-	import com.pages.RabbitCage;
 
 	public class Main {
 		/**
@@ -57,7 +55,7 @@
 			//添加页面切换侦听
 			NGEventDispatcher.getInstance().on(NGEventDispatcher.SHOW_PAGE,this,addPage);
 			//加载资源
-			Laya.loader.load(['res/atlas/comp.atlas','res/atlas/box.atlas','res/atlas/rabbit-cage.atlas',"res/atlas/menu-assets.atlas","menu-assets/btn_teach.png","menu-assets/btn_practice.png","menu-assets/btn_exam.png",'comp/dianzicheng.png','comp/dianzicheng-s.png'],Handler.create(this,loadReady));
+			Laya.loader.load(['res/atlas/comp.atlas','res/atlas/box.atlas',"res/atlas/scene-assets.atlas",'res/atlas/rabbit-cage.atlas',"res/atlas/menu-assets.atlas","menu-assets/btn_teach.png","menu-assets/btn_practice.png","menu-assets/btn_exam.png",'comp/dianzicheng.png','comp/dianzicheng-s.png'],Handler.create(this,loadReady));
 		}
 		
 		private function loadReady():void
@@ -77,8 +75,10 @@
 			mainTip.align="center";
 			mainTip.valign='middle';
 			Laya.stage.addChild(mainTip);
-			 addPage(P_LOGIN);
-//			addPage("page1_1");
+//			addPage(P_LOGIN);
+			SoundManager.musicVolume=0.2;
+			SoundManager.playMusic("sound/背景音乐.mp3",0);
+			addPage("page1_1");
 		}
 		/**
 		 * 弹出操作中的提示信息
@@ -105,7 +105,7 @@
 		 * @param $pageName 场景名称
 		 * 
 		 */		
-		private function addPage($pageName:String):void
+		private function addPage($pageName:String,$replaceParent:Boolean=false):void
 		{
 			// TODO Auto Generated method stub
 			if(oldpage) Tween.to(oldpage,{alpha:0},300,Ease.circIn,Handler.create(this,onDestory,[oldpage]));
@@ -118,7 +118,7 @@
 					newpage=new PageLogin();
 					break ;
 				}
-				//进入场景
+				//进入漫游场景  可跳过
 				case P_CJMY:{
 					newpage=new PageManyou();
 					break ;

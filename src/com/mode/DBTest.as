@@ -7,7 +7,6 @@ package com.mode
 	import laya.display.Animation;
 	import laya.display.Sprite;
 	import laya.events.Event;
-	import laya.maths.Rectangle;
 
 	public class DBTest extends Sprite
 	{
@@ -46,7 +45,6 @@ package com.mode
 			zhishi.pos(-90,-260);
 			skeleton.addChild(zhishi);
 			
-			this.on(Event.MOUSE_DOWN,this,onThisdown);
 			dragRect=new Sprite();
 			dragRect.graphics.drawRect(0,0,100,40,'#ff0000');
 			dragRect.alpha=0;
@@ -54,8 +52,7 @@ package com.mode
 			dragRect.size(100,40);
 			dragRect.name="dragRect";
 			skeleton.addChild(dragRect);
-			dragRect.on(Event.MOUSE_DOWN,this,onDown);
-			skeleton.on(Event.MOUSE_UP,this,onUp);
+			
 			
 			this.addChild(skeleton);
 			this.size(800,600);
@@ -63,7 +60,12 @@ package com.mode
 			skeleton.play("daiji",true);
 			skeleton.pos(400,300);
 		}
-		
+		public function InitListener():void
+		{
+			this.on(Event.MOUSE_DOWN,this,onThisdown);
+			dragRect.on(Event.MOUSE_DOWN,this,onDown);
+			skeleton.on(Event.MOUSE_UP,this,onUp);
+		}
 		private function onThisdown(e:Event):void
 		{
 			// TODO Auto Generated method stub

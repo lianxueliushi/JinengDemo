@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":66,
-    "selecteID":68,
+    "selectedBox":1,
+    "selecteID":14,
     "props":{"width":1920,"sceneColor":"#000000","height":1080},
     "nodeParent":-1,
     "label":"View",
@@ -71,7 +71,7 @@
         {
             "x":15,
             "type":"Button",
-            "props":{"y":525,"x":1468,"width":301,"var":"btnStart","stateNum":"2","skin":"menu-assets/btn_in.png","sizeGrid":"12,15,22,14","scaleNum":1,"labelSize":34,"labelPadding":"0,0,7,0","labelFont":"Microsoft YaHei","labelColors":"#ffffff,#ffffff","labelBold":true,"label":"进入实验","height":98,"clicksoundurl":"sound/弹出音效2.wav","click":"startHandler","appendProps":"laya/pages/ScaleButton.prop"},
+            "props":{"y":525,"x":1468,"width":301,"var":"btnStart","stateNum":"2","skin":"menu-assets/btn_in.png","sizeGrid":"12,15,22,14","scaleNum":1,"labelSize":34,"labelPadding":"0,0,7,0","labelFont":"Microsoft YaHei","labelColors":"#ffffff,#ffffff","labelBold":true,"label":"进入实验","height":98,"clicksoundurl":"sound/提示窗口音效.WAV","click":"startHandler","appendProps":"laya/pages/ScaleButton.prop"},
             "nodeParent":1,
             "label":"Button(btnStart)",
             "isDirectory":false,
@@ -87,13 +87,14 @@
             "props":{"y":282,"x":221,"width":321,"var":"nav1","spaceY":36,"height":614},
             "nodeParent":1,
             "label":"List(nav1)",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":4,
             "child":[
                 {
+                    "x":30,
                     "type":"Box",
                     "props":{"y":0,"x":0,"width":258,"name":"render","height":92},
                     "nodeParent":4,
@@ -105,8 +106,9 @@
                     "compId":5,
                     "child":[
                         {
+                            "x":45,
                             "type":"Button",
-                            "props":{"y":48,"x":129,"width":259,"stateNum":"2","skin":"menu-assets/btn_menu.png","sizeGrid":"13,14,23,13","scaleNum":1.1,"name":"btn","labelSize":36,"labelPadding":"0,0,9,0","labelFont":"Microsoft YaHei","labelColors":"#0081d3,#ffffff","labelBold":true,"label":"生理学实验","height":97,"appendProps":"laya/pages/ScaleButton.prop","anchorY":0.5,"anchorX":0.5},
+                            "props":{"y":48,"x":129,"width":259,"stateNum":"2","skin":"menu-assets/btn_menu.png","sizeGrid":"13,14,23,13","scaleNum":1.1,"name":"btn","labelSize":36,"labelPadding":"0,0,9,0","labelFont":"Microsoft YaHei","labelColors":"#0081d3,#ffffff","labelBold":true,"label":"生理学实验","height":97,"clicksoundurl":"sound/提示窗口音效.WAV","appendProps":"laya/pages/ScaleButton.prop","anchorY":0.5,"anchorX":0.5},
                             "nodeParent":5,
                             "label":"Button(btn)",
                             "isDirectory":false,
@@ -146,7 +148,7 @@
                         {
                             "x":45,
                             "type":"Button",
-                            "props":{"y":0,"x":0,"width":358,"stateNum":"2","skin":"menu-assets/btn_menu.png","sizeGrid":"13,14,23,13","scaleNum":1,"name":"btn","labelSize":34,"labelPadding":"0,0,9,0","labelFont":"Microsoft YaHei","labelColors":"#0081d3,#ffffff","labelBold":true,"label":"生理学实验","height":95,"appendProps":"laya/pages/ScaleButton.prop"},
+                            "props":{"y":0,"x":0,"width":358,"stateNum":"2","skin":"menu-assets/btn_menu.png","sizeGrid":"13,14,23,13","scaleNum":1,"name":"btn","labelSize":34,"labelPadding":"0,0,9,0","labelFont":"Microsoft YaHei","labelColors":"#0081d3,#ffffff","labelBold":true,"label":"生理学实验","height":95,"clicksoundurl":"sound/提示窗口音效.WAV","appendProps":"laya/pages/ScaleButton.prop"},
                             "nodeParent":66,
                             "label":"Button(btn)",
                             "isDirectory":false,
@@ -165,14 +167,13 @@
             "props":{"top":0,"presetID":1,"preset":"laya/assets/box_top.prefab","name":"box_top","left":0},
             "nodeParent":1,
             "label":"Box(box_top)",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":71,
             "child":[
                 {
-                    "x":30,
                     "type":"Image",
                     "props":{"presetID":2,"preset":"laya/assets/box_top.prefab"},
                     "nodeParent":71,
@@ -186,7 +187,6 @@
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "props":{"presetID":3,"preset":"laya/assets/box_top.prefab"},
                     "nodeParent":71,
@@ -200,7 +200,6 @@
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Button",
                     "props":{"presetID":4,"preset":"laya/assets/box_top.prefab"},
                     "nodeParent":71,
@@ -214,7 +213,6 @@
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Button",
                     "props":{"presetID":5,"preset":"laya/assets/box_top.prefab"},
                     "nodeParent":71,
@@ -228,7 +226,6 @@
                     "$HIDDEN":false
                 },
                 {
-                    "x":30,
                     "type":"Button",
                     "props":{"presetID":6,"preset":"laya/assets/box_top.prefab"},
                     "nodeParent":71,

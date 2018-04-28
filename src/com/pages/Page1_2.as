@@ -47,11 +47,18 @@ package com.pages
 			_role.on('BEGIN_DRAG',this,begindragRole);
 			_role.on('END_DRAG',this,enddragRole);
 			this.addChild(_role);
-			_role.pos(-100,box_tuzi.y-300);
+			Laya.timer.once(1000,this,addHandler);
+			_role.pos(box_tuzi.x-400,box_tuzi.y-300);
 			_role.alpha=0;
 			Laya.stage.on(Event.MOUSE_DOWN,this,beginDrag);
 			Laya.stage.on(Event.MOUSE_UP,this,endDrag);
 			Laya.stage.on(Event.MOUSE_OUT,this,endDrag);
+		}
+		
+		private function addHandler():void
+		{
+			// TODO Auto Generated method stub
+			_role.InitListener();
 		}
 		
 		private function onAnimationLabel(label:String):void
@@ -114,7 +121,31 @@ package com.pages
 		{
 			// TODO Auto Generated method stub
 			box.stop();
+//			
+			
+			templet=new Templet();
+			templet.on(Event.COMPLETE,this,onParseCom2);
+			templet.on(Event.ERROR,this,onParseError);
+			templet.loadAni('tuzi1/tierduo001.sk');
+		}
+		
+		private function onParseCom2():void
+		{
+			// TODO Auto Generated method stub
+			trace('骨骼动画加载完毕');
+			skeleton=templet.buildArmature(0);
+			skeleton.play(0,false);
+			skeleton.pos(box_tuzi.x+400,box_tuzi.y-230);
+//			skeleton.on(Event.COMPLETE,this,playOver);
+			box2.visible=true;
 			box1.visible=false;
+			box2.addChild(skeleton);
+		}
+		
+		private function playOver():void
+		{
+			// TODO Auto Generated method stub
+			Laya.timer.once(1500,this,addPage);
 		}
 		
 		private function onParseError():void
@@ -146,14 +177,14 @@ package com.pages
 			
 			/*Main.showTip("做的很好，马上进入下一步，耳缘静脉注射");
 			box.gotoAndStop(28);*/
-			Laya.timer.once(1500,this,addPage);
+//			Laya.timer.once(1500,this,addPage);
 		}
 		
 		private function addPage():void
 		{
 			// TODO Auto Generated method stub
 			Main.hideTip();
-			NGEventDispatcher.getInstance().event(NGEventDispatcher.SHOW_PAGE,'page2');
+			NGEventDispatcher.getInstance().event(NGEventDispatcher.SHOW_PAGE,'page2_1');
 		}
 		/**
 		 * 
@@ -180,6 +211,8 @@ package com.pages
 		private var lastY:Number;
 		private var fangHezi:Templet;
 		private var fangheziSkeleton:Skeleton;
+		private var templet:Templet;
+		private var skeleton:Skeleton;
 		/**
 		 * 开始拖动盒子   鼠标上下拖动 模拟开箱动作
 		 * 

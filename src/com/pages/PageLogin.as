@@ -3,6 +3,7 @@ package com.pages
 	import com.eventdispatcher.NGEventDispatcher;
 	
 	import laya.events.Event;
+	import laya.media.SoundManager;
 	import laya.utils.Ease;
 	import laya.utils.Tween;
 	
@@ -66,10 +67,12 @@ package com.pages
 			if(ipt_userName.text.replace(" ","").length==0){
 				lab_msg.visible=true;
 				lab_msg.changeText("请检查您的用户名！");
+				SoundManager.playSound("sound/错误.WAV",1);
 			}
 			else if(ipt_userPwd.text.replace(" ","").length==0){
 				lab_msg.visible=true;
 				lab_msg.changeText("请输入密码！");
+				SoundManager.playSound("sound/错误.WAV",1);
 			}
 			else{
 				lab_msg.changeText("");

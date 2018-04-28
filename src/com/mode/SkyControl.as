@@ -25,7 +25,7 @@ package com.mode
 		public function SkyControl($url:String)
 		{
 			super();
-			var scene:Scene=new Scene();
+			var scene:Scene=Scene.load("LayaScene_lizi/lizi.ls");
 			this.addChild(scene);
 //			//创建方向光 ------------------------
 //			var light:DirectionLight = scene.addChild(new DirectionLight()) as DirectionLight;
@@ -59,8 +59,9 @@ package com.mode
 		private function mouseLeave():void
 		{
 			// TODO Auto Generated method stub
+//			trace("mouseLeave");
 			/*Laya.timer.clear(this,freeHandler);
-			Laya.timer.once(10*1000,this,freeHandler);*/
+			Laya.timer.once(4*1000,this,freeHandler);*/
 		}
 		/**
 		 *自由旋转   
@@ -69,7 +70,7 @@ package com.mode
 		private function freeHandler():void
 		{
 			// TODO Auto Generated method stub
-			
+			camera.transform.rotate(new Vector3(0,180,0),true,false);
 		}
 		private var r:Number=0;
 		private var speed:Number=0.01;
@@ -77,10 +78,10 @@ package com.mode
 		{
 			// TODO Auto Generated method stub
 			camera.transform.rotate(new Vector3(0,speed,0),true,false);
-			trace("ss"+camera.transform.localRotation.y);
+//			trace("ss"+camera.transform.localRotation.y);
 			r+=speed;
-			if(r>10) speed*=-1;
-			if(r<-10) speed*=-1;
+			/*if(r>30) speed*=-1;
+			if(r<-30) speed*=-1;*/
 			
 		}
 		public function onDispose():void{

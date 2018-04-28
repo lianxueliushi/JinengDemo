@@ -31,12 +31,11 @@ package com.pages
 		 *二级目录 
 		 */		
 		private var dataList2:Array=[
-			[{des:"常用器械及手术技能1",value:"CYQX"},{des:"BL-420生物机能实验",value:"SWJN"},{des:"小鼠实验基本操作",value:"XSJB"},{des:"大鼠实验基本操作",value:"DSJB"},{des:"兔类实验基本操作",value:"TLJB"},{des:"蛙类实验基本操作",value:"WLJB"}],
-			[{des:"常用器械及手术技能2",value:"CYQX"},{des:"BL-420生物机能实验",value:"SWJN"},{des:"小鼠实验基本操作",value:"XSJB"},{des:"大鼠实验基本操作",value:"DSJB"},{des:"兔类实验基本操作",value:"TLJB"},{des:"蛙类实验基本操作",value:"WLJB"}],
-			[{des:"常用器械及手术技能3",value:"CYQX"},{des:"BL-420生物机能实验",value:"SWJN"},{des:"小鼠实验基本操作",value:"XSJB"},{des:"大鼠实验基本操作",value:"DSJB"},{des:"兔类实验基本操作",value:"TLJB"},{des:"蛙类实验基本操作",value:"WLJB"}],
-			[{des:"常用器械及手术技能4",value:"CYQX"},{des:"BL-420生物机能实验",value:"SWJN"},{des:"小鼠实验基本操作",value:"XSJB"},{des:"大鼠实验基本操作",value:"DSJB"},{des:"兔类实验基本操作",value:"TLJB"},{des:"蛙类实验基本操作",value:"WLJB"}],
-			[{des:"常用器械及手术技能5",value:"CYQX"},{des:"BL-420生物机能实验",value:"SWJN"},{des:"小鼠实验基本操作",value:"XSJB"},{des:"大鼠实验基本操作",value:"DSJB"},{des:"兔类实验基本操作",value:"TLJB"},{des:"蛙类实验基本操作",value:"WLJB"}],
-			[{des:"常用器械及手术技能6",value:"CYQX"},{des:"BL-420生物机能实验",value:"SWJN"},{des:"小鼠实验基本操作",value:"XSJB"},{des:"大鼠实验基本操作",value:"DSJB"},{des:"兔类实验基本操作",value:"TLJB"},{des:"蛙类实验基本操作",value:"WLJB"}]
+			[{des:"常用器械及手术技能1",value:"CYQX"},{des:"BL-420生物机能实验",value:"SWJN"},{des:"小鼠实验基本操作",value:"XSJB"},{des:"大鼠实验基本操作",value:"DSJB"},{des:"兔类实验基本操作",value:"TLJB"},{des:"蛙类实验基本操作",value:"WLJB"},{des:"大鼠实验基本操作",value:"DSJB"},{des:"兔类实验基本操作",value:"TLJB"},{des:"蛙类实验基本操作",value:"WLJB"}],
+			[{des:"常用器械及手术技能2",value:"CYQX"},{des:"BL-420生物机能实验",value:"SWJN"},{des:"小鼠实验基本操作",value:"XSJB"},{des:"大鼠实验基本操作",value:"DSJB"},{des:"兔类实验基本操作",value:"TLJB"},{des:"蛙类实验基本操作",value:"WLJB"},{des:"大鼠实验基本操作",value:"DSJB"},{des:"兔类实验基本操作",value:"TLJB"},{des:"蛙类实验基本操作",value:"WLJB"}],
+			[{des:"常用器械及手术技能3",value:"CYQX"},{des:"BL-420生物机能实验",value:"SWJN"},{des:"小鼠实验基本操作",value:"XSJB"},{des:"大鼠实验基本操作",value:"DSJB"},{des:"兔类实验基本操作",value:"TLJB"},{des:"蛙类实验基本操作",value:"WLJB"},{des:"大鼠实验基本操作",value:"DSJB"},{des:"兔类实验基本操作",value:"TLJB"},{des:"蛙类实验基本操作",value:"WLJB"}],
+			[{des:"常用器械及手术技能4",value:"CYQX"},{des:"BL-420生物机能实验",value:"SWJN"},{des:"小鼠实验基本操作",value:"XSJB"},{des:"大鼠实验基本操作",value:"DSJB"},{des:"兔类实验基本操作",value:"TLJB"},{des:"蛙类实验基本操作",value:"WLJB"},{des:"大鼠实验基本操作",value:"DSJB"},{des:"兔类实验基本操作",value:"TLJB"},{des:"蛙类实验基本操作",value:"WLJB"}],
+			[{des:"常用器械及手术技能5",value:"CYQX"},{des:"BL-420生物机能实验",value:"SWJN"},{des:"小鼠实验基本操作",value:"XSJB"},{des:"大鼠实验基本操作",value:"DSJB"},{des:"兔类实验基本操作",value:"TLJB"},{des:"蛙类实验基本操作",value:"WLJB"},{des:"大鼠实验基本操作",value:"DSJB"},{des:"兔类实验基本操作",value:"TLJB"},{des:"蛙类实验基本操作",value:"WLJB"}],
 		];
 		public function PageShiyanleixing()
 		{
@@ -62,10 +61,9 @@ package com.pages
 			
 			//滚动在头或底回弹时间
 			nav2.scrollBar.elasticBackTime= 500;
-			
-			nav2.scrollBar.autoHide=true;
 			//滚动在头或底最大距离
 			nav2.scrollBar.elasticDistance = 200;
+			nav2.scrollBar.autoHide=false;
 			nav2.scrollBar.showButtons=false;
 			btnStart.on(Event.CLICK,this,onClick);
 			
